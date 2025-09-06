@@ -17,11 +17,11 @@ import { I18nService } from '../services/i18n.service';
       <span class="theme-icon">
         <span class="sun-icon" [class.hidden]="themeService.isDarkMode() || themeService.isEasterEggMode()">☀️</span>
         <span class="moon-icon" [class.hidden]="themeService.isLightMode() || themeService.isEasterEggMode()">🌙</span>
-        <span class="cyber-icon" [class.hidden]="themeService.getEasterEggTheme() !== 'cyberpunk'">⚡</span>
-        <span class="kawaii-icon" [class.hidden]="themeService.getEasterEggTheme() !== 'kawaii'">🌸</span>
-        <span class="ocean-icon" [class.hidden]="themeService.getEasterEggTheme() !== 'ocean'">🌊</span>
-        <span class="fire-icon" [class.hidden]="themeService.getEasterEggTheme() !== 'fire'">🔥</span>
-        <span class="space-icon" [class.hidden]="themeService.getEasterEggTheme() !== 'space'">🌌</span>
+        <span class="cyber-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'cyberpunk'">⚡</span>
+        <span class="kawaii-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'kawaii'">🌸</span>
+        <span class="ocean-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'ocean'">🌊</span>
+        <span class="fire-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'fire'">🔥</span>
+        <span class="space-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'space'">🌌</span>
       </span>
       <span class="theme-text">
         {{ getCurrentThemeText() }}
@@ -83,8 +83,7 @@ import { I18nService } from '../services/i18n.service';
     .ocean-icon.hidden,
     .fire-icon.hidden,
     .space-icon.hidden {
-      opacity: 0;
-      transform: scale(0.8);
+      display: none !important;
     }
     
     .cyber-icon {
