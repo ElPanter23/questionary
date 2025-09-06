@@ -6,6 +6,7 @@ const { getDatabase } = require('../database/init');
 router.get('/question/:characterId', (req, res) => {
   const db = getDatabase();
   const { characterId } = req.params;
+  const { season } = req.query;
   
   // Prüfen ob Charakter existiert
   db.get('SELECT * FROM characters WHERE id = ?', [characterId], (err, character) => {
@@ -18,25 +19,42 @@ router.get('/question/:characterId', (req, res) => {
       return;
     }
     
-    // Alle noch nicht beantworteten Fragen für diesen Charakter finden
-    const query = `
-      SELECT q.* FROM questions q
-      LEFT JOIN answered_questions aq ON q.id = aq.question_id AND aq.character_id = ?
-      WHERE aq.question_id IS NULL
-      ORDER BY RANDOM()
-      LIMIT 1
-    `;
+    // Query für Fragen basierend auf Season-Filter
+    let query, params;
     
-    db.get(query, [characterId], (err, question) => {
+    if (season && season !== '') {
+      // Spezifische Season filtern
+      query = `
+        SELECT q.* FROM questions q
+        LEFT JOIN answered_questions aq ON q.id = aq.question_id AND aq.character_id = ?
+        WHERE aq.question_id IS NULL AND q.difficulty = ?
+        ORDER BY RANDOM()
+        LIMIT 1
+      `;
+      params = [characterId, parseInt(season)];
+    } else {
+      // Alle Seasons (kein Filter)
+      query = `
+        SELECT q.* FROM questions q
+        LEFT JOIN answered_questions aq ON q.id = aq.question_id AND aq.character_id = ?
+        WHERE aq.question_id IS NULL
+        ORDER BY RANDOM()
+        LIMIT 1
+      `;
+      params = [characterId];
+    }
+    
+    db.get(query, params, (err, question) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
       
       if (!question) {
+        const seasonText = season ? ` für Season ${season}` : '';
         res.status(404).json({ 
-          error: 'Keine verfügbaren Fragen für diesen Charakter',
-          message: 'Alle Fragen wurden bereits beantwortet'
+          error: `Keine verfügbaren Fragen für diesen Charakter${seasonText}`,
+          message: season ? `Alle Fragen der Season ${season} wurden bereits beantwortet` : 'Alle Fragen wurden bereits beantwortet'
         });
         return;
       }

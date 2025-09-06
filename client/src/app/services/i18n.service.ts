@@ -38,12 +38,14 @@ export interface Translation {
   // Game component
   questionCharacterGame: string;
   selectCharacter: string;
+  selectSeason: string;
+  allSeasons: string;
   noDescription: string;
   noCharactersAvailable: string;
   manageCharacters: string;
   currentQuestion: string;
   category: string;
-  difficulty: string;
+  season: string;
   yourAnswer: string;
   enterAnswerHere: string;
   saveAnswer: string;
@@ -105,7 +107,7 @@ export interface Translation {
   manageQuestions: string;
   addNewQuestion: string;
   questionText: string;
-  difficultyLevel: string;
+  seasonLevel: string;
   addQuestion: string;
   addingQuestion: string;
   importMultipleQuestions: string;
@@ -121,7 +123,7 @@ export interface Translation {
   importFromCustomUrl: string;
   url: string;
   customCategory: string;
-  customDifficulty: string;
+  customSeason: string;
   importFromUrlButton: string;
   existingQuestions: string;
   filterByCategory: string;
@@ -130,7 +132,7 @@ export interface Translation {
   searchQuestionText: string;
   noQuestionsYet: string;
   noQuestionsMatchFilter: string;
-  difficultyLevelLabel: string;
+  seasonLevelLabel: string;
   noValidQuestionsFound: string;
   questionAdded: string;
   questionsImported: string;
@@ -175,7 +177,7 @@ export interface Translation {
   placeholderCharacterDescription: string;
   placeholderQuestionText: string;
   placeholderCategory: string;
-  placeholderDifficulty: string;
+  placeholderSeason: string;
   placeholderMultipleQuestions: string;
   placeholderUrl: string;
   placeholderCustomCategory: string;
@@ -218,12 +220,14 @@ const translations: Record<Language, Translation> = {
     // Game component
     questionCharacterGame: 'Frage-Charakter-Spiel',
     selectCharacter: 'Wähle einen Charakter:',
+    selectSeason: 'Wähle eine Staffel:',
+    allSeasons: 'Alle Staffeln',
     noDescription: 'Keine Beschreibung',
     noCharactersAvailable: 'Keine Charaktere vorhanden. Erstelle zuerst einen Charakter!',
     manageCharacters: 'Charaktere verwalten',
     currentQuestion: 'Aktuelle Frage',
     category: 'Kategorie',
-    difficulty: 'Schwierigkeit',
+    season: 'Staffel',
     yourAnswer: 'Deine Antwort:',
     enterAnswerHere: 'Gib hier deine Antwort ein...',
     saveAnswer: 'Antwort speichern',
@@ -284,7 +288,7 @@ const translations: Record<Language, Translation> = {
     manageQuestions: 'Fragen verwalten',
     addNewQuestion: 'Neue Frage hinzufügen',
     questionText: 'Fragentext',
-    difficultyLevel: 'Schwierigkeit (1-5)',
+    seasonLevel: 'Staffel (1-5)',
     addQuestion: 'Frage hinzufügen',
     addingQuestion: 'Hinzufügen...',
     importMultipleQuestions: 'Mehrere Fragen importieren',
@@ -300,7 +304,7 @@ const translations: Record<Language, Translation> = {
     importFromCustomUrl: 'Von beliebiger URL importieren',
     url: 'URL',
     customCategory: 'Kategorie',
-    customDifficulty: 'Schwierigkeit (1-5)',
+    customSeason: 'Staffel (1-5)',
     importFromUrlButton: 'Von URL importieren',
     existingQuestions: 'Vorhandene Fragen',
     filterByCategory: 'Nach Kategorie filtern:',
@@ -309,7 +313,7 @@ const translations: Record<Language, Translation> = {
     searchQuestionText: 'Fragentext durchsuchen',
     noQuestionsYet: 'Noch keine Fragen vorhanden.',
     noQuestionsMatchFilter: 'Keine Fragen entsprechen den Filterkriterien.',
-    difficultyLevelLabel: 'Schwierigkeit:',
+    seasonLevelLabel: 'Staffel:',
     noValidQuestionsFound: 'Keine gültigen Fragen gefunden.',
     questionAdded: 'Frage erfolgreich hinzugefügt!',
     questionsImported: 'Fragen erfolgreich importiert!',
@@ -354,7 +358,7 @@ const translations: Record<Language, Translation> = {
     placeholderCharacterDescription: 'z.B. Neugierige Abenteurerin',
     placeholderQuestionText: 'z.B. Was ist dein größter Traum?',
     placeholderCategory: 'z.B. Persönlich',
-    placeholderDifficulty: '1',
+    placeholderSeason: '1',
     placeholderMultipleQuestions: 'Was ist dein größter Traum?\nWelche Farbe beschreibt dich am besten?\nWas würdest du tun, wenn du unsichtbar wärst?',
     placeholderUrl: 'https://example.com/questions',
     placeholderCustomCategory: 'z.B. Allgemein'
@@ -395,12 +399,14 @@ const translations: Record<Language, Translation> = {
     // Game component
     questionCharacterGame: 'Question-Character Game',
     selectCharacter: 'Choose a character:',
+    selectSeason: 'Choose a season:',
+    allSeasons: 'All Seasons',
     noDescription: 'No description',
     noCharactersAvailable: 'No characters available. Create a character first!',
     manageCharacters: 'Manage Characters',
     currentQuestion: 'Current Question',
     category: 'Category',
-    difficulty: 'Difficulty',
+    season: 'Season',
     yourAnswer: 'Your Answer:',
     enterAnswerHere: 'Enter your answer here...',
     saveAnswer: 'Save Answer',
@@ -461,7 +467,7 @@ const translations: Record<Language, Translation> = {
     manageQuestions: 'Manage Questions',
     addNewQuestion: 'Add New Question',
     questionText: 'Question Text',
-    difficultyLevel: 'Difficulty (1-5)',
+    seasonLevel: 'Season (1-5)',
     addQuestion: 'Add Question',
     addingQuestion: 'Adding...',
     importMultipleQuestions: 'Import Multiple Questions',
@@ -477,7 +483,7 @@ const translations: Record<Language, Translation> = {
     importFromCustomUrl: 'Import from Custom URL',
     url: 'URL',
     customCategory: 'Category',
-    customDifficulty: 'Difficulty (1-5)',
+    customSeason: 'Season (1-5)',
     importFromUrlButton: 'Import from URL',
     existingQuestions: 'Existing Questions',
     filterByCategory: 'Filter by Category:',
@@ -486,7 +492,7 @@ const translations: Record<Language, Translation> = {
     searchQuestionText: 'Search question text',
     noQuestionsYet: 'No questions yet.',
     noQuestionsMatchFilter: 'No questions match the filter criteria.',
-    difficultyLevelLabel: 'Difficulty:',
+    seasonLevelLabel: 'Season:',
     noValidQuestionsFound: 'No valid questions found.',
     questionAdded: 'Question successfully added!',
     questionsImported: 'Questions successfully imported!',
@@ -531,7 +537,7 @@ const translations: Record<Language, Translation> = {
     placeholderCharacterDescription: 'e.g. Curious adventurer',
     placeholderQuestionText: 'e.g. What is your biggest dream?',
     placeholderCategory: 'e.g. Personal',
-    placeholderDifficulty: '1',
+    placeholderSeason: '1',
     placeholderMultipleQuestions: 'What is your biggest dream?\nWhat color best describes you?\nWhat would you do if you were invisible?',
     placeholderUrl: 'https://example.com/questions',
     placeholderCustomCategory: 'e.g. General'
@@ -572,12 +578,14 @@ const translations: Record<Language, Translation> = {
     // Game component
     questionCharacterGame: 'Juego de Preguntas-Personajes',
     selectCharacter: 'Elige un personaje:',
+    selectSeason: 'Elige una temporada:',
+    allSeasons: 'Todas las Temporadas',
     noDescription: 'Sin descripción',
     noCharactersAvailable: 'No hay personajes disponibles. ¡Crea un personaje primero!',
     manageCharacters: 'Gestionar Personajes',
     currentQuestion: 'Pregunta Actual',
     category: 'Categoría',
-    difficulty: 'Dificultad',
+    season: 'Temporada',
     yourAnswer: 'Tu Respuesta:',
     enterAnswerHere: 'Ingresa tu respuesta aquí...',
     saveAnswer: 'Guardar Respuesta',
@@ -638,7 +646,7 @@ const translations: Record<Language, Translation> = {
     manageQuestions: 'Gestionar Preguntas',
     addNewQuestion: 'Agregar Nueva Pregunta',
     questionText: 'Texto de la Pregunta',
-    difficultyLevel: 'Dificultad (1-5)',
+    seasonLevel: 'Temporada (1-5)',
     addQuestion: 'Agregar Pregunta',
     addingQuestion: 'Agregando...',
     importMultipleQuestions: 'Importar Múltiples Preguntas',
@@ -654,7 +662,7 @@ const translations: Record<Language, Translation> = {
     importFromCustomUrl: 'Importar desde URL Personalizada',
     url: 'URL',
     customCategory: 'Categoría',
-    customDifficulty: 'Dificultad (1-5)',
+    customSeason: 'Temporada (1-5)',
     importFromUrlButton: 'Importar desde URL',
     existingQuestions: 'Preguntas Existentes',
     filterByCategory: 'Filtrar por Categoría:',
@@ -663,7 +671,7 @@ const translations: Record<Language, Translation> = {
     searchQuestionText: 'Buscar texto de pregunta',
     noQuestionsYet: 'Aún no hay preguntas.',
     noQuestionsMatchFilter: 'Ninguna pregunta coincide con los criterios de filtro.',
-    difficultyLevelLabel: 'Dificultad:',
+    seasonLevelLabel: 'Temporada:',
     noValidQuestionsFound: 'No se encontraron preguntas válidas.',
     questionAdded: '¡Pregunta agregada exitosamente!',
     questionsImported: '¡Preguntas importadas exitosamente!',
@@ -708,7 +716,7 @@ const translations: Record<Language, Translation> = {
     placeholderCharacterDescription: 'ej. Aventurera curiosa',
     placeholderQuestionText: 'ej. ¿Cuál es tu mayor sueño?',
     placeholderCategory: 'ej. Personal',
-    placeholderDifficulty: '1',
+    placeholderSeason: '1',
     placeholderMultipleQuestions: '¿Cuál es tu mayor sueño?\n¿Qué color te describe mejor?\n¿Qué harías si fueras invisible?',
     placeholderUrl: 'https://ejemplo.com/preguntas',
     placeholderCustomCategory: 'ej. General'
@@ -749,12 +757,14 @@ const translations: Record<Language, Translation> = {
     // Game component
     questionCharacterGame: 'Jeu Questions-Personnages',
     selectCharacter: 'Choisissez un personnage :',
+    selectSeason: 'Choisissez une saison :',
+    allSeasons: 'Toutes les Saisons',
     noDescription: 'Aucune description',
     noCharactersAvailable: 'Aucun personnage disponible. Créez d\'abord un personnage !',
     manageCharacters: 'Gérer les Personnages',
     currentQuestion: 'Question Actuelle',
     category: 'Catégorie',
-    difficulty: 'Difficulté',
+    season: 'Saison',
     yourAnswer: 'Votre Réponse :',
     enterAnswerHere: 'Entrez votre réponse ici...',
     saveAnswer: 'Sauvegarder la Réponse',
@@ -815,7 +825,7 @@ const translations: Record<Language, Translation> = {
     manageQuestions: 'Gérer les Questions',
     addNewQuestion: 'Ajouter une Nouvelle Question',
     questionText: 'Texte de la Question',
-    difficultyLevel: 'Difficulté (1-5)',
+    seasonLevel: 'Saison (1-5)',
     addQuestion: 'Ajouter la Question',
     addingQuestion: 'Ajout en cours...',
     importMultipleQuestions: 'Importer Plusieurs Questions',
@@ -831,7 +841,7 @@ const translations: Record<Language, Translation> = {
     importFromCustomUrl: 'Importer depuis une URL Personnalisée',
     url: 'URL',
     customCategory: 'Catégorie',
-    customDifficulty: 'Difficulté (1-5)',
+    customSeason: 'Saison (1-5)',
     importFromUrlButton: 'Importer depuis l\'URL',
     existingQuestions: 'Questions Existantes',
     filterByCategory: 'Filtrer par Catégorie :',
@@ -840,7 +850,7 @@ const translations: Record<Language, Translation> = {
     searchQuestionText: 'Rechercher le texte de la question',
     noQuestionsYet: 'Aucune question pour le moment.',
     noQuestionsMatchFilter: 'Aucune question ne correspond aux critères de filtre.',
-    difficultyLevelLabel: 'Difficulté :',
+    seasonLevelLabel: 'Saison :',
     noValidQuestionsFound: 'Aucune question valide trouvée.',
     questionAdded: 'Question ajoutée avec succès !',
     questionsImported: 'Questions importées avec succès !',
@@ -885,7 +895,7 @@ const translations: Record<Language, Translation> = {
     placeholderCharacterDescription: 'ex. Aventurière curieuse',
     placeholderQuestionText: 'ex. Quel est ton plus grand rêve ?',
     placeholderCategory: 'ex. Personnel',
-    placeholderDifficulty: '1',
+    placeholderSeason: '1',
     placeholderMultipleQuestions: 'Quel est ton plus grand rêve ?\nQuelle couleur te décrit le mieux ?\nQue ferais-tu si tu étais invisible ?',
     placeholderUrl: 'https://exemple.com/questions',
     placeholderCustomCategory: 'ex. Général'

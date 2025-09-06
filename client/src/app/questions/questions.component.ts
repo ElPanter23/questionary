@@ -40,7 +40,7 @@ import { I18nService } from '../services/i18n.service';
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="difficulty">{{ i18nService.getTranslation('difficultyLevel') }}</label>
+              <label class="form-label" for="difficulty">{{ i18nService.getTranslation('seasonLevel') }}</label>
               <input 
                 type="number" 
                 id="difficulty" 
@@ -49,7 +49,7 @@ import { I18nService } from '../services/i18n.service';
                 [(ngModel)]="newQuestion.difficulty"
                 min="1" 
                 max="5"
-                [placeholder]="i18nService.getTranslation('placeholderDifficulty')">
+                [placeholder]="i18nService.getTranslation('placeholderSeason')">
             </div>
           </div>
           
@@ -145,7 +145,7 @@ import { I18nService } from '../services/i18n.service';
               </div>
               
               <div class="form-group">
-                <label class="form-label" for="customDifficulty">{{ i18nService.getTranslation('customDifficulty') }}</label>
+                <label class="form-label" for="customDifficulty">{{ i18nService.getTranslation('customSeason') }}</label>
                 <input 
                   type="number" 
                   id="customDifficulty" 
@@ -200,7 +200,7 @@ import { I18nService } from '../services/i18n.service';
             <div class="mt-2">
               <span *ngIf="question.category" class="status-badge">{{ question.category }}</span>
               <span *ngIf="question.difficulty" class="status-badge" style="margin-left: 8px;">
-                {{ i18nService.getTranslation('difficultyLevelLabel') }} {{ question.difficulty }}
+                {{ i18nService.getTranslation('seasonLevelLabel') }} {{ question.difficulty }}
               </span>
             </div>
             <div class="mt-4">

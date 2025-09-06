@@ -35,12 +35,28 @@ import { I18nService } from '../services/i18n.service';
         </div>
       </div>
 
+      <!-- Season Selection -->
+      <div class="mb-4" *ngIf="characters.length > 0">
+        <h3>{{ i18nService.getTranslation('selectSeason') }}</h3>
+        <div class="form-group">
+          <select 
+            class="form-control" 
+            [(ngModel)]="selectedSeason" 
+            (ngModelChange)="onSeasonChange()">
+            <option value="">{{ i18nService.getTranslation('allSeasons') }}</option>
+            <option *ngFor="let season of availableSeasons" [value]="season">
+              {{ i18nService.getTranslation('season') }} {{ season }}
+            </option>
+          </select>
+        </div>
+      </div>
+
       <!-- Aktuelle Frage -->
       <div *ngIf="currentQuestion && selectedCharacter" class="question-card">
         <h2>{{ currentQuestion.question.text }}</h2>
         <div class="question-meta">
           <span *ngIf="currentQuestion.question.category">{{ i18nService.getTranslation('category') }}: {{ currentQuestion.question.category }}</span>
-          <span *ngIf="currentQuestion.question.difficulty"> • {{ i18nService.getTranslation('difficulty') }}: {{ currentQuestion.question.difficulty }}</span>
+          <span *ngIf="currentQuestion.question.difficulty"> • {{ i18nService.getTranslation('season') }}: {{ currentQuestion.question.difficulty }}</span>
         </div>
         
         <div class="answer-section mt-4">
@@ -146,6 +162,8 @@ export class GameComponent implements OnInit {
   characters: Character[] = [];
   characterStatus: CharacterStatus[] = [];
   selectedCharacter: Character | null = null;
+  selectedSeason: string = '';
+  availableSeasons: number[] = [];
   currentQuestion: GameQuestion | null = null;
   currentAnswer: string = '';
   loading = false;
@@ -158,6 +176,7 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     this.loadCharacters();
     this.loadCharacterStatus();
+    this.loadAvailableSeasons();
   }
 
   loadCharacters() {
@@ -203,7 +222,10 @@ export class GameComponent implements OnInit {
     this.successMessage = '';
     this.currentAnswer = '';
 
-    this.apiService.getRandomQuestion(this.selectedCharacter.id).subscribe({
+    // Convert selectedSeason to number if it's not empty
+    const season = this.selectedSeason && this.selectedSeason !== '' ? parseInt(this.selectedSeason) : undefined;
+
+    this.apiService.getRandomQuestion(this.selectedCharacter.id, season).subscribe({
       next: (question) => {
         this.currentQuestion = question;
         this.noQuestionsAvailable = false;
@@ -295,5 +317,25 @@ export class GameComponent implements OnInit {
 
   getCharacterStatus(characterId: number): CharacterStatus | undefined {
     return this.characterStatus.find(s => s.id === characterId);
+  }
+
+  loadAvailableSeasons() {
+    // For now, we'll use seasons 1-5 as available seasons
+    // In a real implementation, this could be loaded from the API
+    this.availableSeasons = [1, 2, 3, 4, 5];
+  }
+
+  onSeasonChange() {
+    // Reset current question when season changes
+    this.currentQuestion = null;
+    this.currentAnswer = '';
+    this.error = '';
+    this.successMessage = '';
+    this.noQuestionsAvailable = false;
+    
+    // If a character is selected, get a new question for the selected season
+    if (this.selectedCharacter) {
+      this.getNewQuestion();
+    }
   }
 }

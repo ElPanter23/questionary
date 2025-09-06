@@ -108,8 +108,11 @@ export class ApiService {
   }
 
   // Game
-  getRandomQuestion(characterId: number): Observable<GameQuestion> {
-    return this.http.get<GameQuestion>(`${this.baseUrl}/game/question/${characterId}`);
+  getRandomQuestion(characterId: number, season?: number): Observable<GameQuestion> {
+    const url = season ? 
+      `${this.baseUrl}/game/question/${characterId}?season=${season}` : 
+      `${this.baseUrl}/game/question/${characterId}`;
+    return this.http.get<GameQuestion>(url);
   }
 
   markQuestionAnswered(characterId: number, questionId: number, answerText: string): Observable<any> {
