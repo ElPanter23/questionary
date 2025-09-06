@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark' | 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,8 @@ export class ThemeService {
   
   private _initializeTheme(): void {
     const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+    const validThemes = ['light', 'dark', 'cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    if (savedTheme && validThemes.includes(savedTheme)) {
       this._sTheme.set(savedTheme);
     } else {
       // Check system preference
@@ -35,6 +36,18 @@ export class ThemeService {
     this._applyTheme();
   }
   
+  public toggleEasterEgg(): void {
+    this._sTheme.set('cyberpunk');
+    localStorage.setItem('theme', 'cyberpunk');
+    this._applyTheme();
+  }
+  
+  public setEasterEggTheme(theme: 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space'): void {
+    this._sTheme.set(theme);
+    localStorage.setItem('theme', theme);
+    this._applyTheme();
+  }
+  
   public setTheme(theme: Theme): void {
     this._sTheme.set(theme);
     localStorage.setItem('theme', theme);
@@ -47,12 +60,24 @@ export class ThemeService {
     
     // Update meta theme-color for mobile browsers
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    const themeColors = {
+      'light': '#667eea',
+      'dark': '#1a1a1a',
+      'cyberpunk': '#0a0a0a',
+      'kawaii': '#ffb6c1',
+      'ocean': '#006994',
+      'fire': '#ff4500',
+      'space': '#4b0082'
+    };
+    
+    const themeColor = themeColors[theme] || '#667eea';
+    
     if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1a1a' : '#667eea');
+      metaThemeColor.setAttribute('content', themeColor);
     } else {
       const meta = document.createElement('meta');
       meta.name = 'theme-color';
-      meta.content = theme === 'dark' ? '#1a1a1a' : '#667eea';
+      meta.content = themeColor;
       document.head.appendChild(meta);
     }
   }
@@ -63,5 +88,15 @@ export class ThemeService {
   
   public isLightMode(): boolean {
     return this._sTheme() === 'light';
+  }
+  
+  public isEasterEggMode(): boolean {
+    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    return easterEggThemes.includes(this._sTheme());
+  }
+  
+  public getEasterEggTheme(): string | null {
+    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    return easterEggThemes.includes(this._sTheme()) ? this._sTheme() : null;
   }
 }
