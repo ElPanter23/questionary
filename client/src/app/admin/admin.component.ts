@@ -29,9 +29,12 @@ import { I18nService } from '../services/i18n.service';
             <div class="stat-label">{{ i18nService.getTranslation('answeredQuestionsCount') }}</div>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="loadStats()" [disabled]="loading">
-          {{ loading ? i18nService.getTranslation('loading') : i18nService.getTranslation('updateStatistics') }}
-        </button>
+        <p>
+          <br>
+          <button class="btn btn-primary" (click)="loadStats()" [disabled]="loading">
+            {{ loading ? i18nService.getTranslation('loading') : i18nService.getTranslation('updateStatistics') }}
+          </button>
+        </p>
       </div>
 
       <!-- Database Management -->

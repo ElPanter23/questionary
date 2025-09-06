@@ -37,6 +37,7 @@ import { I18nService } from '../services/i18n.service';
       font-size: 14px;
       font-weight: 500;
       color: var(--theme-toggle-text, #495057);
+      width: 200px;
       
       &:hover {
         background: var(--theme-toggle-bg-hover, #e9ecef);

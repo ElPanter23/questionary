@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { I18nService, Language } from '../services/i18n.service';
@@ -9,13 +9,10 @@ import { I18nService, Language } from '../services/i18n.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="language-selector">
-      <label class="language-label" [for]="'language-select'">
-        {{ i18nService.getTranslation('selectLanguage') }}
-      </label>
       <select 
         id="language-select"
         class="language-select"
-        [value]="i18nService.sLanguage()"
+        [value]="currentLanguage()"
         (change)="onLanguageChange($event)"
         [title]="i18nService.getTranslation('selectLanguage')"
       >
@@ -33,7 +30,7 @@ import { I18nService, Language } from '../services/i18n.service';
       display: flex;
       flex-direction: column;
       gap: 4px;
-      min-width: 200px;
+      width: 200px;
     }
     
     .language-label {
@@ -87,9 +84,35 @@ import { I18nService, Language } from '../services/i18n.service';
     }
   `]
 })
-export class LanguageSelectorComponent {
+export class LanguageSelectorComponent implements OnInit {
   public readonly i18nService = inject(I18nService);
   public readonly availableLanguages = this.i18nService.getAvailableLanguages();
+  
+  // Create a computed signal that always reflects the current language
+  public readonly currentLanguage = computed(() => this.i18nService.sLanguage());
+  
+  constructor() {
+    // Use effect to update the select element when language changes
+    effect(() => {
+      const currentLang = this.currentLanguage();
+      setTimeout(() => {
+        const selectElement = document.getElementById('language-select') as HTMLSelectElement;
+        if (selectElement && selectElement.value !== currentLang) {
+          selectElement.value = currentLang;
+        }
+      }, 0);
+    });
+  }
+  
+  ngOnInit(): void {
+    // Ensure the select is set to the current language on init
+    setTimeout(() => {
+      const selectElement = document.getElementById('language-select') as HTMLSelectElement;
+      if (selectElement) {
+        selectElement.value = this.currentLanguage();
+      }
+    }, 0);
+  }
   
   public onLanguageChange(event: Event): void {
     const target = event.target as HTMLSelectElement;

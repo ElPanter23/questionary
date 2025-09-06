@@ -65,13 +65,13 @@ import { I18nService } from '../services/i18n.service';
               </small>
             </div>
             <div class="character-actions mt-4">
-              <button (click)="viewCharacterDetails(character)" style="margin-right: 8px; background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;" [title]="i18nService.getTranslation('characterDetails')">
+              <button (click)="viewCharacterDetails(character)" class="btn-details" [title]="i18nService.getTranslation('characterDetails')">
                 👁️ {{ i18nService.getTranslation('details') }}
               </button>
-              <button (click)="editCharacter(character)" style="margin-right: 8px; background-color: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+              <button (click)="editCharacter(character)" class="btn-edit">
                 ✏️ {{ i18nService.getTranslation('editCharacter') }}
               </button>
-              <button (click)="deleteCharacter(character.id)" style="background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+              <button (click)="deleteCharacter(character.id)" class="btn-delete">
                 🗑️ {{ i18nService.getTranslation('delete') }}
               </button>
             </div>
@@ -241,7 +241,6 @@ import { I18nService } from '../services/i18n.service';
 
     .character-id {
       background: #f0f0f0;
-      color: #666;
       padding: 4px 8px;
       border-radius: 4px;
       font-size: 0.8em;
@@ -249,7 +248,6 @@ import { I18nService } from '../services/i18n.service';
     }
 
     .character-description {
-      color: #666;
       margin-bottom: 12px;
       line-height: 1.4;
     }
@@ -321,14 +319,13 @@ import { I18nService } from '../services/i18n.service';
     }
 
     .info-row span {
-      color: #666;
       text-align: right;
     }
 
     .character-stats {
       margin-bottom: 24px;
       padding: 20px;
-      background: #f8f9fa;
+      background: var(--info-section-bg, #f8f9fa) !important;;
       border-radius: 8px;
     }
 
@@ -356,7 +353,6 @@ import { I18nService } from '../services/i18n.service';
 
     .stat-label {
       font-size: 0.9em;
-      color: #666;
     }
 
     .character-actions-details {
@@ -377,7 +373,7 @@ import { I18nService } from '../services/i18n.service';
     .character-qa-history {
       margin-top: 24px;
       padding: 20px;
-      background: #f8f9fa;
+      background: var(--info-section-bg, #f8f9fa) !important;;
       border-radius: 8px;
     }
     
@@ -480,6 +476,7 @@ export class CharactersComponent implements OnInit {
     this.editingCharacter = { ...character };
     this.error = '';
     this.successMessage = '';
+    this.closeCharacterDetails()
   }
 
   updateCharacter() {
