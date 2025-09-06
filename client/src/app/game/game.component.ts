@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, Character, GameQuestion, CharacterStatus } from '../services/api.service';
+import { I18nService } from '../services/i18n.service';
 
 @Component({
   selector: 'app-game',
@@ -9,11 +10,11 @@ import { ApiService, Character, GameQuestion, CharacterStatus } from '../service
   imports: [CommonModule, FormsModule],
   template: `
     <div class="card">
-      <h2 class="text-center mb-4">🎮 Frage-Charakter-Spiel</h2>
+      <h2 class="text-center mb-4">🎮 {{ i18nService.getTranslation('questionCharacterGame') }}</h2>
       
       <!-- Charakter-Auswahl -->
       <div class="mb-4">
-        <h3>Wähle einen Charakter:</h3>
+        <h3>{{ i18nService.getTranslation('selectCharacter') }}</h3>
         <div class="grid grid-2 mt-4" *ngIf="characters.length > 0">
           <div 
             *ngFor="let character of characters" 
@@ -21,16 +22,16 @@ import { ApiService, Character, GameQuestion, CharacterStatus } from '../service
             [class.selected]="selectedCharacter?.id === character.id"
             (click)="selectCharacter(character)">
             <h3>{{ character.name }}</h3>
-            <p>{{ character.description || 'Keine Beschreibung' }}</p>
+            <p>{{ character.description || i18nService.getTranslation('noDescription') }}</p>
             <div class="status-badge" [class.completed]="getCharacterStatus(character.id)?.answered_count === getCharacterStatus(character.id)?.total_questions">
-              {{ getCharacterStatus(character.id)?.answered_count || 0 }} / {{ getCharacterStatus(character.id)?.total_questions || 0 }} Fragen
+              {{ getCharacterStatus(character.id)?.answered_count || 0 }} / {{ getCharacterStatus(character.id)?.total_questions || 0 }} {{ i18nService.getTranslation('questions') }}
             </div>
           </div>
         </div>
         
         <div *ngIf="characters.length === 0" class="text-center">
-          <p>Keine Charaktere vorhanden. Erstelle zuerst einen Charakter!</p>
-          <a routerLink="/characters" class="btn">Charaktere verwalten</a>
+          <p>{{ i18nService.getTranslation('noCharactersAvailable') }}</p>
+          <a routerLink="/characters" class="btn">{{ i18nService.getTranslation('manageCharacters') }}</a>
         </div>
       </div>
 
@@ -38,22 +39,22 @@ import { ApiService, Character, GameQuestion, CharacterStatus } from '../service
       <div *ngIf="currentQuestion && selectedCharacter" class="question-card">
         <h2>{{ currentQuestion.question.text }}</h2>
         <div class="question-meta">
-          <span *ngIf="currentQuestion.question.category">Kategorie: {{ currentQuestion.question.category }}</span>
-          <span *ngIf="currentQuestion.question.difficulty"> • Schwierigkeit: {{ currentQuestion.question.difficulty }}</span>
+          <span *ngIf="currentQuestion.question.category">{{ i18nService.getTranslation('category') }}: {{ currentQuestion.question.category }}</span>
+          <span *ngIf="currentQuestion.question.difficulty"> • {{ i18nService.getTranslation('difficulty') }}: {{ currentQuestion.question.difficulty }}</span>
         </div>
         
         <div class="answer-section mt-4">
-          <label for="answerText" class="form-label">Deine Antwort:</label>
+          <label for="answerText" class="form-label">{{ i18nService.getTranslation('yourAnswer') }}</label>
           <textarea 
             id="answerText"
             class="form-control textarea answer-textarea" 
             [(ngModel)]="currentAnswer"
-            placeholder="Gib hier deine Antwort ein..."
+            [placeholder]="i18nService.getTranslation('enterAnswerHere')"
             rows="4"
             maxlength="1000">
           </textarea>
           <div class="answer-counter">
-            {{ currentAnswer?.length || 0 }} / 1000 Zeichen
+            {{ currentAnswer?.length || 0 }} / 1000 {{ i18nService.getTranslation('characters') }}
           </div>
         </div>
         
@@ -62,26 +63,26 @@ import { ApiService, Character, GameQuestion, CharacterStatus } from '../service
             class="btn" 
             (click)="markAsAnswered()"
             [disabled]="!currentAnswer || currentAnswer.trim() === ''">
-            ✅ Antwort speichern
+            ✅ {{ i18nService.getTranslation('saveAnswer') }}
           </button>
           <button class="btn btn-secondary" (click)="getNewQuestion()" style="margin-left: 12px;">
-            🔄 Neue Frage
+            🔄 {{ i18nService.getTranslation('newQuestion') }}
           </button>
         </div>
       </div>
 
       <!-- Keine Fragen verfügbar -->
       <div *ngIf="noQuestionsAvailable && selectedCharacter" class="text-center">
-        <h3>🎉 Alle Fragen beantwortet!</h3>
-        <p>Du hast alle verfügbaren Fragen für {{ selectedCharacter.name }} beantwortet.</p>
+        <h3>🎉 {{ i18nService.getTranslation('allQuestionsAnswered') }}</h3>
+        <p>{{ i18nService.getTranslation('allQuestionsAnsweredFor') }} {{ selectedCharacter.name }} {{ i18nService.getTranslation('questions') }}.</p>
         <button class="btn btn-secondary" (click)="resetCharacter()">
-          🔄 Charakter zurücksetzen
+          🔄 {{ i18nService.getTranslation('resetCharacter') }}
         </button>
       </div>
 
       <!-- Lade-Status -->
       <div *ngIf="loading" class="loading">
-        <p>Lade...</p>
+        <p>{{ i18nService.getTranslation('loading') }}</p>
       </div>
 
       <!-- Fehler -->
@@ -140,6 +141,8 @@ import { ApiService, Character, GameQuestion, CharacterStatus } from '../service
   `]
 })
 export class GameComponent implements OnInit {
+  public readonly i18nService = inject(I18nService);
+  
   characters: Character[] = [];
   characterStatus: CharacterStatus[] = [];
   selectedCharacter: Character | null = null;
@@ -165,7 +168,7 @@ export class GameComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Laden der Charaktere: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorLoadingCharacters') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -177,7 +180,7 @@ export class GameComponent implements OnInit {
         this.characterStatus = status;
       },
       error: (err) => {
-        console.error('Fehler beim Laden des Status:', err);
+        console.error(this.i18nService.getTranslation('errorLoadingStats'), err);
       }
     });
   }
@@ -211,7 +214,7 @@ export class GameComponent implements OnInit {
           this.noQuestionsAvailable = true;
           this.currentQuestion = null;
         } else {
-          this.error = 'Fehler beim Laden der Frage: ' + err.message;
+          this.error = this.i18nService.getTranslation('errorLoadingQuestion') + ' ' + err.message;
         }
         this.loading = false;
       }
@@ -227,7 +230,7 @@ export class GameComponent implements OnInit {
       this.currentAnswer.trim()
     ).subscribe({
       next: () => {
-        this.successMessage = 'Antwort gespeichert!';
+        this.successMessage = this.i18nService.getTranslation('answerSaved');
         this.currentQuestion = null;
         this.currentAnswer = '';
         this.loadCharacterStatus();
@@ -236,7 +239,7 @@ export class GameComponent implements OnInit {
         }, 1000);
       },
       error: (err) => {
-        this.error = 'Fehler beim Speichern: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorSaving') + ' ' + err.message;
       }
     });
   }
@@ -246,7 +249,7 @@ export class GameComponent implements OnInit {
 
     this.apiService.resetCharacter(this.selectedCharacter.id).subscribe({
       next: () => {
-        this.successMessage = 'Charakter wurde zurückgesetzt!';
+        this.successMessage = this.i18nService.getTranslation('characterReset');
         this.currentQuestion = null;
         this.loadCharacterStatus();
         setTimeout(() => {
@@ -254,7 +257,7 @@ export class GameComponent implements OnInit {
         }, 1000);
       },
       error: (err) => {
-        this.error = 'Fehler beim Zurücksetzen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorResetting') + ' ' + err.message;
       }
     });
   }
@@ -262,7 +265,7 @@ export class GameComponent implements OnInit {
   resetCharacterById(characterId: number) {
     this.apiService.resetCharacter(characterId).subscribe({
       next: () => {
-        this.successMessage = 'Charakter wurde zurückgesetzt!';
+        this.successMessage = this.i18nService.getTranslation('characterReset');
         this.loadCharacterStatus();
         if (this.selectedCharacter?.id === characterId) {
           this.currentQuestion = null;
@@ -270,21 +273,21 @@ export class GameComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.error = 'Fehler beim Zurücksetzen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorResetting') + ' ' + err.message;
       }
     });
   }
 
   resetAllCharacters() {
-    if (confirm('Möchtest du wirklich alle Charaktere zurücksetzen?')) {
+    if (confirm(this.i18nService.getTranslation('confirmResetAll'))) {
       this.apiService.resetAllCharacters().subscribe({
         next: () => {
-          this.successMessage = 'Alle Charaktere wurden zurückgesetzt!';
+          this.successMessage = this.i18nService.getTranslation('allCharactersReset');
           this.currentQuestion = null;
           this.loadCharacterStatus();
         },
         error: (err) => {
-          this.error = 'Fehler beim Zurücksetzen: ' + err.message;
+          this.error = this.i18nService.getTranslation('errorResetting') + ' ' + err.message;
         }
       });
     }

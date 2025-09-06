@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../services/api.service';
+import { I18nService } from '../services/i18n.service';
 
 @Component({
   selector: 'app-characters',
@@ -9,14 +10,14 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
   imports: [CommonModule, FormsModule],
   template: `
     <div class="card">
-      <h2 class="text-center mb-4">👥 Charaktere verwalten</h2>
+      <h2 class="text-center mb-4">👥 {{ i18nService.getTranslation('manageCharactersTitle') }}</h2>
       
       <!-- Neuen Charakter hinzufügen -->
       <div class="mb-4">
-        <h3>Neuen Charakter hinzufügen</h3>
+        <h3>{{ i18nService.getTranslation('addNewCharacter') }}</h3>
         <form (ngSubmit)="addCharacter()" #characterForm="ngForm">
           <div class="form-group">
-            <label class="form-label" for="name">Name *</label>
+            <label class="form-label" for="name">{{ i18nService.getTranslation('name') }} *</label>
             <input 
               type="text" 
               id="name" 
@@ -24,31 +25,31 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
               class="form-control" 
               [(ngModel)]="newCharacter.name" 
               required
-              placeholder="z.B. Alice">
+              [placeholder]="i18nService.getTranslation('placeholderCharacterName')">
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="description">Beschreibung</label>
+            <label class="form-label" for="description">{{ i18nService.getTranslation('description') }}</label>
             <textarea 
               id="description" 
               name="description" 
               class="form-control textarea" 
               [(ngModel)]="newCharacter.description"
-              placeholder="z.B. Neugierige Abenteurerin"></textarea>
+              [placeholder]="i18nService.getTranslation('placeholderCharacterDescription')"></textarea>
           </div>
           
           <button type="submit" class="btn" [disabled]="!characterForm.form.valid || loading">
-            {{ loading ? 'Hinzufügen...' : 'Charakter hinzufügen' }}
+            {{ loading ? i18nService.getTranslation('adding') : i18nService.getTranslation('addCharacter') }}
           </button>
         </form>
       </div>
 
       <!-- Charaktere-Liste -->
       <div>
-        <h3>Vorhandene Charaktere ({{ characters.length }})</h3>
+        <h3>{{ i18nService.getTranslation('existingCharacters') }} ({{ characters.length }})</h3>
         
         <div *ngIf="characters.length === 0" class="text-center">
-          <p>Noch keine Charaktere vorhanden.</p>
+          <p>{{ i18nService.getTranslation('noCharactersYet') }}</p>
         </div>
         
         <div class="grid grid-2" *ngIf="characters.length > 0">
@@ -57,21 +58,21 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
               <h3>{{ character.name }}</h3>
               <span class="character-id">#{{ character.id }}</span>
             </div>
-            <p class="character-description">{{ character.description || 'Keine Beschreibung' }}</p>
+            <p class="character-description">{{ character.description || i18nService.getTranslation('noDescription') }}</p>
             <div class="character-meta">
               <small class="text-muted">
-                Erstellt: {{ formatDate(character.created_at) }}
+                {{ i18nService.getTranslation('created') }} {{ formatDate(character.created_at) }}
               </small>
             </div>
             <div class="character-actions mt-4">
-              <button (click)="viewCharacterDetails(character)" style="margin-right: 8px; background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;" title="Charakter-Details anzeigen">
-                👁️ Details
+              <button (click)="viewCharacterDetails(character)" style="margin-right: 8px; background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;" [title]="i18nService.getTranslation('characterDetails')">
+                👁️ {{ i18nService.getTranslation('details') }}
               </button>
               <button (click)="editCharacter(character)" style="margin-right: 8px; background-color: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;">
-                ✏️ Bearbeiten
+                ✏️ {{ i18nService.getTranslation('editCharacter') }}
               </button>
               <button (click)="deleteCharacter(character.id)" style="background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px;">
-                🗑️ Löschen
+                🗑️ {{ i18nService.getTranslation('delete') }}
               </button>
             </div>
           </div>
@@ -80,10 +81,10 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
 
       <!-- Bearbeiten-Modal -->
       <div *ngIf="editingCharacter" class="card mt-4">
-        <h3>Charakter bearbeiten</h3>
+        <h3>{{ i18nService.getTranslation('editCharacterTitle') }}</h3>
         <form (ngSubmit)="updateCharacter()" #editForm="ngForm">
           <div class="form-group">
-            <label class="form-label" for="editName">Name *</label>
+            <label class="form-label" for="editName">{{ i18nService.getTranslation('name') }} *</label>
             <input 
               type="text" 
               id="editName" 
@@ -94,7 +95,7 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="editDescription">Beschreibung</label>
+            <label class="form-label" for="editDescription">{{ i18nService.getTranslation('description') }}</label>
             <textarea 
               id="editDescription" 
               name="editDescription" 
@@ -104,10 +105,10 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
           
           <div>
             <button type="submit" class="btn" [disabled]="!editForm.form.valid || loading">
-              {{ loading ? 'Speichern...' : 'Speichern' }}
+              {{ loading ? i18nService.getTranslation('saving') : i18nService.getTranslation('save') }}
             </button>
             <button type="button" class="btn btn-secondary" (click)="cancelEdit()" style="margin-left: 12px;">
-              Abbrechen
+              {{ i18nService.getTranslation('cancel') }}
             </button>
           </div>
         </form>
@@ -115,7 +116,7 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
 
       <!-- Lade-Status -->
       <div *ngIf="loading && !editingCharacter" class="loading">
-        <p>Lade Charaktere...</p>
+        <p>{{ i18nService.getTranslation('loading') }}</p>
       </div>
 
       <!-- Fehler -->
@@ -131,76 +132,76 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
       <!-- Charakter-Details Modal -->
       <div *ngIf="selectedCharacter" class="card mt-4 character-details-modal">
         <div class="character-details-header">
-          <h2>{{ selectedCharacter.name }} - Details</h2>
+          <h2>{{ selectedCharacter.name }} - {{ i18nService.getTranslation('characterDetails') }}</h2>
           <button class="btn btn-secondary" (click)="closeCharacterDetails()">
-            ✕ Schließen
+            ✕ {{ i18nService.getTranslation('close') }}
           </button>
         </div>
         
         <div class="character-details-content">
           <div class="character-info">
             <div class="info-row">
-              <label>ID:</label>
+              <label>{{ i18nService.getTranslation('id') }}</label>
               <span>#{{ selectedCharacter.id }}</span>
             </div>
             <div class="info-row">
-              <label>Name:</label>
+              <label>{{ i18nService.getTranslation('name') }}:</label>
               <span>{{ selectedCharacter.name }}</span>
             </div>
             <div class="info-row">
-              <label>Beschreibung:</label>
-              <span>{{ selectedCharacter.description || 'Keine Beschreibung' }}</span>
+              <label>{{ i18nService.getTranslation('description') }}:</label>
+              <span>{{ selectedCharacter.description || i18nService.getTranslation('noDescription') }}</span>
             </div>
             <div class="info-row">
-              <label>Erstellt am:</label>
+              <label>{{ i18nService.getTranslation('created') }}:</label>
               <span>{{ formatDate(selectedCharacter.created_at) }}</span>
             </div>
           </div>
           
           <div class="character-stats" *ngIf="characterStats">
-            <h3>Statistiken</h3>
+            <h3>{{ i18nService.getTranslation('statistics') }}</h3>
             <div class="stats-grid">
               <div class="stat-item">
                 <div class="stat-value">{{ characterStats.answered_count || 0 }}</div>
-                <div class="stat-label">Beantwortete Fragen</div>
+                <div class="stat-label">{{ i18nService.getTranslation('answeredQuestions') }}</div>
               </div>
               <div class="stat-item">
                 <div class="stat-value">{{ characterStats.total_questions || 0 }}</div>
-                <div class="stat-label">Verfügbare Fragen</div>
+                <div class="stat-label">{{ i18nService.getTranslation('availableQuestions') }}</div>
               </div>
               <div class="stat-item">
                 <div class="stat-value">{{ getProgressPercentage() }}%</div>
-                <div class="stat-label">Fortschritt</div>
+                <div class="stat-label">{{ i18nService.getTranslation('progress') }}</div>
               </div>
             </div>
           </div>
           
           <div class="character-actions-details">
             <button class="btn btn-primary" (click)="startGameWithCharacter(selectedCharacter)">
-              🎮 Spiel starten
+              🎮 {{ i18nService.getTranslation('startGame') }}
             </button>
             <button class="btn btn-secondary" (click)="editCharacter(selectedCharacter)">
-              ✏️ Bearbeiten
+              ✏️ {{ i18nService.getTranslation('editCharacter') }}
             </button>
             <button class="btn btn-warning" (click)="resetCharacterProgress(selectedCharacter.id)">
-              🔄 Fortschritt zurücksetzen
+              🔄 {{ i18nService.getTranslation('resetProgress') }}
             </button>
           </div>
           
           <div class="character-qa-history" *ngIf="characterAnswers.length > 0">
-            <h3>Fragen & Antworten ({{ characterAnswers.length }})</h3>
+            <h3>{{ i18nService.getTranslation('questionsAndAnswers') }} ({{ characterAnswers.length }})</h3>
             <div class="qa-list">
               <div *ngFor="let answer of characterAnswers" class="qa-item">
                 <div class="qa-question">
-                  <strong>Frage #{{ answer.id }}:</strong> {{ answer.question.text }}
+                  <strong>{{ i18nService.getTranslation('questions') }} #{{ answer.id }}:</strong> {{ answer.question.text }}
                   <span *ngIf="answer.question.category" class="qa-category">{{ answer.question.category }}</span>
                 </div>
                 <div class="qa-answer">
-                  <strong>Antwort:</strong> {{ answer.answer_text }}
+                  <strong>{{ i18nService.getTranslation('yourAnswer') }}:</strong> {{ answer.answer_text }}
                 </div>
                 <div class="qa-meta">
                   <small class="text-muted">
-                    Beantwortet am: {{ formatDate(answer.answered_at) }}
+                    {{ i18nService.getTranslation('answeredOn') }} {{ formatDate(answer.answered_at) }}
                   </small>
                 </div>
               </div>
@@ -208,8 +209,8 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
           </div>
           
           <div class="character-qa-history" *ngIf="characterAnswers.length === 0 && characterStats && characterStats.answered_count === 0">
-            <h3>Fragen & Antworten</h3>
-            <p class="text-muted">Noch keine Fragen beantwortet. Starte das Spiel, um Fragen zu beantworten!</p>
+            <h3>{{ i18nService.getTranslation('questionsAndAnswers') }}</h3>
+            <p class="text-muted">{{ i18nService.getTranslation('noQuestionsAnsweredYet') }}</p>
           </div>
         </div>
       </div>
@@ -422,6 +423,8 @@ import { ApiService, Character, CharacterAnswers, QuestionAnswer } from '../serv
   `]
 })
 export class CharactersComponent implements OnInit {
+  public readonly i18nService = inject(I18nService);
+  
   characters: Character[] = [];
   newCharacter: Partial<Character> = {};
   editingCharacter: Character | null = null;
@@ -446,7 +449,7 @@ export class CharactersComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Laden der Charaktere: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorLoadingCharacters') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -463,11 +466,11 @@ export class CharactersComponent implements OnInit {
       next: (character) => {
         this.characters.unshift(character);
         this.newCharacter = {};
-        this.successMessage = 'Charakter erfolgreich hinzugefügt!';
+        this.successMessage = this.i18nService.getTranslation('characterAdded');
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Hinzufügen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorAdding') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -493,11 +496,11 @@ export class CharactersComponent implements OnInit {
           this.characters[index] = updatedCharacter;
         }
         this.editingCharacter = null;
-        this.successMessage = 'Charakter erfolgreich aktualisiert!';
+        this.successMessage = this.i18nService.getTranslation('characterUpdated');
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Aktualisieren: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorUpdating') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -510,7 +513,7 @@ export class CharactersComponent implements OnInit {
   }
 
   deleteCharacter(characterId: number) {
-    if (!confirm('Möchtest du diesen Charakter wirklich löschen?')) return;
+    if (!confirm(this.i18nService.getTranslation('confirmDeleteCharacter'))) return;
 
     this.loading = true;
     this.error = '';
@@ -519,11 +522,11 @@ export class CharactersComponent implements OnInit {
     this.apiService.deleteCharacter(characterId).subscribe({
       next: () => {
         this.characters = this.characters.filter(c => c.id !== characterId);
-        this.successMessage = 'Charakter erfolgreich gelöscht!';
+        this.successMessage = this.i18nService.getTranslation('characterDeleted');
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Löschen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorDeleting') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -553,7 +556,7 @@ export class CharactersComponent implements OnInit {
         this.characterStats = characterStatus || { answered_count: 0, total_questions: 0 };
       },
       error: (err) => {
-        console.error('Fehler beim Laden der Statistiken:', err);
+        console.error(this.i18nService.getTranslation('errorLoadingStats'), err);
         this.characterStats = { answered_count: 0, total_questions: 0 };
       }
     });
@@ -565,7 +568,7 @@ export class CharactersComponent implements OnInit {
         this.characterAnswers = data.answers;
       },
       error: (err) => {
-        console.error('Fehler beim Laden der Antworten:', err);
+        console.error(this.i18nService.getTranslation('errorLoadingAnswers'), err);
         this.characterAnswers = [];
       }
     });
@@ -594,11 +597,11 @@ export class CharactersComponent implements OnInit {
     // This would typically use Angular Router
     console.log('Starting game with character:', character);
     // For now, just show a message
-    this.successMessage = `Spiel mit ${character.name} gestartet!`;
+    this.successMessage = `${this.i18nService.getTranslation('startGame')} ${character.name}!`;
   }
 
   resetCharacterProgress(characterId: number) {
-    if (!confirm('Möchtest du den Fortschritt dieses Charakters wirklich zurücksetzen?')) return;
+    if (!confirm(this.i18nService.getTranslation('confirmResetProgress'))) return;
 
     this.loading = true;
     this.error = '';
@@ -606,12 +609,12 @@ export class CharactersComponent implements OnInit {
 
     this.apiService.resetCharacter(characterId).subscribe({
       next: () => {
-        this.successMessage = 'Fortschritt erfolgreich zurückgesetzt!';
+        this.successMessage = this.i18nService.getTranslation('progressReset');
         this.loadCharacterStats(characterId);
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Zurücksetzen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorResetting') + ' ' + err.message;
         this.loading = false;
       }
     });

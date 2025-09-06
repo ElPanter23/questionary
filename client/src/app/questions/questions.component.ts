@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, Question } from '../services/api.service';
+import { I18nService } from '../services/i18n.service';
 
 @Component({
   selector: 'app-questions',
@@ -9,37 +10,37 @@ import { ApiService, Question } from '../services/api.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="card">
-      <h2 class="text-center mb-4">❓ Fragen verwalten</h2>
+      <h2 class="text-center mb-4">❓ {{ i18nService.getTranslation('manageQuestions') }}</h2>
       
       <!-- Neue Frage hinzufügen -->
       <div class="mb-4">
-        <h3>Neue Frage hinzufügen</h3>
+        <h3>{{ i18nService.getTranslation('addNewQuestion') }}</h3>
         <form (ngSubmit)="addQuestion()" #questionForm="ngForm">
           <div class="form-group">
-            <label class="form-label" for="text">Fragentext *</label>
+            <label class="form-label" for="text">{{ i18nService.getTranslation('questionText') }} *</label>
             <textarea 
               id="text" 
               name="text" 
               class="form-control textarea" 
               [(ngModel)]="newQuestion.text" 
               required
-              placeholder="z.B. Was ist dein größter Traum?"></textarea>
+              [placeholder]="i18nService.getTranslation('placeholderQuestionText')"></textarea>
           </div>
           
           <div class="grid grid-2">
             <div class="form-group">
-              <label class="form-label" for="category">Kategorie</label>
+              <label class="form-label" for="category">{{ i18nService.getTranslation('category') }}</label>
               <input 
                 type="text" 
                 id="category" 
                 name="category" 
                 class="form-control" 
                 [(ngModel)]="newQuestion.category"
-                placeholder="z.B. Persönlich">
+                [placeholder]="i18nService.getTranslation('placeholderCategory')">
             </div>
             
             <div class="form-group">
-              <label class="form-label" for="difficulty">Schwierigkeit (1-5)</label>
+              <label class="form-label" for="difficulty">{{ i18nService.getTranslation('difficultyLevel') }}</label>
               <input 
                 type="number" 
                 id="difficulty" 
@@ -48,59 +49,59 @@ import { ApiService, Question } from '../services/api.service';
                 [(ngModel)]="newQuestion.difficulty"
                 min="1" 
                 max="5"
-                placeholder="1">
+                [placeholder]="i18nService.getTranslation('placeholderDifficulty')">
             </div>
           </div>
           
           <button type="submit" class="btn" [disabled]="!questionForm.form.valid || loading">
-            {{ loading ? 'Hinzufügen...' : 'Frage hinzufügen' }}
+            {{ loading ? i18nService.getTranslation('addingQuestion') : i18nService.getTranslation('addQuestion') }}
           </button>
         </form>
       </div>
 
       <!-- Bulk Import -->
       <div class="card mb-4">
-        <h3>📥 Mehrere Fragen importieren</h3>
-        <p>Füge mehrere Fragen gleichzeitig hinzu. Eine Frage pro Zeile:</p>
+        <h3>📥 {{ i18nService.getTranslation('importMultipleQuestions') }}</h3>
+        <p>{{ i18nService.getTranslation('addMultipleQuestions') }}</p>
         <form (ngSubmit)="importQuestions()" #importForm="ngForm">
           <div class="form-group">
-            <label class="form-label" for="bulkText">Fragen (eine pro Zeile)</label>
+            <label class="form-label" for="bulkText">{{ i18nService.getTranslation('questionsOnePerLine') }}</label>
             <textarea 
               id="bulkText" 
               name="bulkText" 
               class="form-control textarea" 
               [(ngModel)]="bulkImportText" 
               required
-              placeholder="Was ist dein größter Traum?&#10;Welche Farbe beschreibt dich am besten?&#10;Was würdest du tun, wenn du unsichtbar wärst?"></textarea>
+              [placeholder]="i18nService.getTranslation('placeholderMultipleQuestions')"></textarea>
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="bulkCategory">Standard-Kategorie</label>
+            <label class="form-label" for="bulkCategory">{{ i18nService.getTranslation('standardCategory') }}</label>
             <input 
               type="text" 
               id="bulkCategory" 
               name="bulkCategory" 
               class="form-control" 
               [(ngModel)]="bulkCategory"
-              placeholder="z.B. Allgemein">
+              [placeholder]="i18nService.getTranslation('placeholderCustomCategory')">
           </div>
           
           <button type="submit" class="btn" [disabled]="!importForm.form.valid || loading">
-            {{ loading ? 'Importieren...' : 'Fragen importieren' }}
+            {{ loading ? i18nService.getTranslation('importing') : i18nService.getTranslation('importQuestions') }}
           </button>
         </form>
       </div>
 
       <!-- Web Scraping -->
       <div class="card mb-4">
-        <h3>🌐 Fragen von Webseiten importieren</h3>
+        <h3>🌐 {{ i18nService.getTranslation('importFromWeb') }}</h3>
         
         <!-- 100-fragen.de Scraping -->
         <div class="mb-4">
-          <h4>Von 100-fragen.de importieren</h4>
+          <h4>{{ i18nService.getTranslation('importFrom100Fragen') }}</h4>
           <div class="grid grid-2">
             <div class="form-group">
-              <label class="form-label" for="scrapingCategory">Kategorie</label>
+              <label class="form-label" for="scrapingCategory">{{ i18nService.getTranslation('selectCategory') }}</label>
               <select id="scrapingCategory" class="form-control" [(ngModel)]="selectedScrapingCategory">
                 <option *ngFor="let category of scrapingCategories" [value]="category.key">
                   {{ category.name }} - {{ category.description }}
@@ -109,7 +110,7 @@ import { ApiService, Question } from '../services/api.service';
             </div>
             <div class="form-group">
               <button class="btn" (click)="scrapeFrom100Fragen()" [disabled]="scraping">
-                {{ scraping ? 'Scraping...' : '🚀 Von 100-fragen.de importieren' }}
+                {{ scraping ? i18nService.getTranslation('importing') : i18nService.getTranslation('importFrom100FragenButton') }}
               </button>
             </div>
           </div>
@@ -117,10 +118,10 @@ import { ApiService, Question } from '../services/api.service';
 
         <!-- Custom URL Scraping -->
         <div>
-          <h4>Von beliebiger URL importieren</h4>
+          <h4>{{ i18nService.getTranslation('importFromCustomUrl') }}</h4>
           <form (ngSubmit)="scrapeFromCustomUrl()" #customForm="ngForm">
             <div class="form-group">
-              <label class="form-label" for="customUrl">URL</label>
+              <label class="form-label" for="customUrl">{{ i18nService.getTranslation('url') }}</label>
               <input 
                 type="url" 
                 id="customUrl" 
@@ -128,23 +129,23 @@ import { ApiService, Question } from '../services/api.service';
                 class="form-control" 
                 [(ngModel)]="customUrl" 
                 required
-                placeholder="https://example.com/questions">
+                [placeholder]="i18nService.getTranslation('placeholderUrl')">
             </div>
             
             <div class="grid grid-2">
               <div class="form-group">
-                <label class="form-label" for="customCategory">Kategorie</label>
+                <label class="form-label" for="customCategory">{{ i18nService.getTranslation('customCategory') }}</label>
                 <input 
                   type="text" 
                   id="customCategory" 
                   name="customCategory" 
                   class="form-control" 
                   [(ngModel)]="customCategory"
-                  placeholder="z.B. Gescrapt">
+                  [placeholder]="i18nService.getTranslation('placeholderCustomCategory')">
               </div>
               
               <div class="form-group">
-                <label class="form-label" for="customDifficulty">Schwierigkeit (1-5)</label>
+                <label class="form-label" for="customDifficulty">{{ i18nService.getTranslation('customDifficulty') }}</label>
                 <input 
                   type="number" 
                   id="customDifficulty" 
@@ -157,7 +158,7 @@ import { ApiService, Question } from '../services/api.service';
             </div>
             
             <button type="submit" class="btn" [disabled]="!customForm.form.valid || scraping">
-              {{ scraping ? 'Scraping...' : '🌐 Von URL importieren' }}
+              {{ scraping ? i18nService.getTranslation('importing') : i18nService.getTranslation('importFromUrlButton') }}
             </button>
           </form>
         </div>
@@ -166,31 +167,31 @@ import { ApiService, Question } from '../services/api.service';
       <!-- Fragen-Liste -->
       <div>
         <div class="mb-4">
-          <h3>Vorhandene Fragen ({{ questions.length }})</h3>
+          <h3>{{ i18nService.getTranslation('existingQuestions') }} ({{ questions.length }})</h3>
           <div class="grid grid-2">
             <div>
-              <label class="form-label" for="filterCategory">Nach Kategorie filtern:</label>
+              <label class="form-label" for="filterCategory">{{ i18nService.getTranslation('filterByCategory') }}</label>
               <select id="filterCategory" class="form-control" [(ngModel)]="filterCategory" (ngModelChange)="filterQuestions()">
-                <option value="">Alle Kategorien</option>
+                <option value="">{{ i18nService.getTranslation('allCategories') }}</option>
                 <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
               </select>
             </div>
             <div>
-              <label class="form-label" for="searchText">Suchen:</label>
+              <label class="form-label" for="searchText">{{ i18nService.getTranslation('search') }}</label>
               <input 
                 type="text" 
                 id="searchText" 
                 class="form-control" 
                 [(ngModel)]="searchText" 
                 (ngModelChange)="filterQuestions()"
-                placeholder="Fragentext durchsuchen">
+                [placeholder]="i18nService.getTranslation('searchQuestionText')">
             </div>
           </div>
         </div>
         
         <div *ngIf="filteredQuestions.length === 0" class="text-center">
-          <p *ngIf="questions.length === 0">Noch keine Fragen vorhanden.</p>
-          <p *ngIf="questions.length > 0">Keine Fragen entsprechen den Filterkriterien.</p>
+          <p *ngIf="questions.length === 0">{{ i18nService.getTranslation('noQuestionsYet') }}</p>
+          <p *ngIf="questions.length > 0">{{ i18nService.getTranslation('noQuestionsMatchFilter') }}</p>
         </div>
         
         <div class="grid grid-2" *ngIf="filteredQuestions.length > 0">
@@ -199,12 +200,12 @@ import { ApiService, Question } from '../services/api.service';
             <div class="mt-2">
               <span *ngIf="question.category" class="status-badge">{{ question.category }}</span>
               <span *ngIf="question.difficulty" class="status-badge" style="margin-left: 8px;">
-                Schwierigkeit: {{ question.difficulty }}
+                {{ i18nService.getTranslation('difficultyLevelLabel') }} {{ question.difficulty }}
               </span>
             </div>
             <div class="mt-4">
               <button class="btn btn-danger" (click)="deleteQuestion(question.id)">
-                🗑️ Löschen
+                🗑️ {{ i18nService.getTranslation('delete') }}
               </button>
             </div>
           </div>
@@ -213,7 +214,7 @@ import { ApiService, Question } from '../services/api.service';
 
       <!-- Lade-Status -->
       <div *ngIf="loading" class="loading">
-        <p>Lade Fragen...</p>
+        <p>{{ i18nService.getTranslation('loading') }}</p>
       </div>
 
       <!-- Fehler -->
@@ -239,6 +240,8 @@ import { ApiService, Question } from '../services/api.service';
   `]
 })
 export class QuestionsComponent implements OnInit {
+  public readonly i18nService = inject(I18nService);
+  
   questions: Question[] = [];
   filteredQuestions: Question[] = [];
   newQuestion: Partial<Question> = {};
@@ -276,7 +279,7 @@ export class QuestionsComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Laden der Fragen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorLoadingQuestions') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -288,7 +291,7 @@ export class QuestionsComponent implements OnInit {
         this.scrapingCategories = categories;
       },
       error: (err) => {
-        console.error('Fehler beim Laden der Scraping-Kategorien:', err);
+        console.error(this.i18nService.getTranslation('errorLoadingStats'), err);
       }
     });
   }
@@ -325,11 +328,11 @@ export class QuestionsComponent implements OnInit {
         this.updateCategories();
         this.filterQuestions();
         this.newQuestion = {};
-        this.successMessage = 'Frage erfolgreich hinzugefügt!';
+        this.successMessage = this.i18nService.getTranslation('questionAdded');
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Hinzufügen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorAddingQuestion') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -344,7 +347,7 @@ export class QuestionsComponent implements OnInit {
       .filter(text => text.length > 0);
 
     if (questionTexts.length === 0) {
-      this.error = 'Keine gültigen Fragen gefunden.';
+      this.error = this.i18nService.getTranslation('noValidQuestionsFound');
       return;
     }
 
@@ -363,18 +366,18 @@ export class QuestionsComponent implements OnInit {
         this.bulkImportText = '';
         this.bulkCategory = '';
         this.loadQuestions();
-        this.successMessage = `${result.success} Fragen erfolgreich importiert!`;
+        this.successMessage = `${result.success} ${this.i18nService.getTranslation('questionsImported')}`;
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Importieren: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorImporting') + ' ' + err.message;
         this.loading = false;
       }
     });
   }
 
   deleteQuestion(questionId: number) {
-    if (!confirm('Möchtest du diese Frage wirklich löschen?')) return;
+    if (!confirm(this.i18nService.getTranslation('confirmDeleteQuestion'))) return;
 
     this.loading = true;
     this.error = '';
@@ -385,11 +388,11 @@ export class QuestionsComponent implements OnInit {
         this.questions = this.questions.filter(q => q.id !== questionId);
         this.updateCategories();
         this.filterQuestions();
-        this.successMessage = 'Frage erfolgreich gelöscht!';
+        this.successMessage = this.i18nService.getTranslation('questionDeleted');
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Löschen: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorDeletingQuestion') + ' ' + err.message;
         this.loading = false;
       }
     });
@@ -404,11 +407,11 @@ export class QuestionsComponent implements OnInit {
     this.apiService.scrapeFrom100Fragen(this.selectedScrapingCategory).subscribe({
       next: (result) => {
         this.loadQuestions();
-        this.successMessage = `${result.success} Fragen erfolgreich importiert!`;
+        this.successMessage = `${result.success} ${this.i18nService.getTranslation('questionsImported')}`;
         this.scraping = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Scraping: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorScraping') + ' ' + err.message;
         this.scraping = false;
       }
     });
@@ -416,7 +419,7 @@ export class QuestionsComponent implements OnInit {
 
   scrapeFromCustomUrl() {
     if (!this.customUrl.trim()) {
-      this.error = 'Bitte gib eine URL ein';
+      this.error = this.i18nService.getTranslation('pleaseEnterUrl');
       return;
     }
 
@@ -427,12 +430,12 @@ export class QuestionsComponent implements OnInit {
     this.apiService.scrapeFromCustomUrl(this.customUrl, this.customCategory, this.customDifficulty).subscribe({
       next: (result) => {
         this.loadQuestions();
-        this.successMessage = `${result.success} Fragen erfolgreich importiert!`;
+        this.successMessage = `${result.success} ${this.i18nService.getTranslation('questionsImported')}`;
         this.customUrl = '';
         this.scraping = false;
       },
       error: (err) => {
-        this.error = 'Fehler beim Scraping: ' + err.message;
+        this.error = this.i18nService.getTranslation('errorScraping') + ' ' + err.message;
         this.scraping = false;
       }
     });

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+import { I18nService } from '../services/i18n.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,61 +10,61 @@ import { ApiService } from '../services/api.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="card">
-      <h2 class="text-center mb-4">🔧 Admin Interface</h2>
+      <h2 class="text-center mb-4">🔧 {{ i18nService.getTranslation('adminInterface') }}</h2>
       
       <!-- Database Statistics -->
       <div class="mb-4">
-        <h3>📊 Datenbank Statistiken</h3>
+        <h3>📊 {{ i18nService.getTranslation('databaseStatistics') }}</h3>
         <div class="grid grid-3 gap-3" *ngIf="databaseStats">
           <div class="stat-card">
             <div class="stat-number">{{ databaseStats.questionsCount }}</div>
-            <div class="stat-label">Fragen</div>
+            <div class="stat-label">{{ i18nService.getTranslation('questionsCount') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">{{ databaseStats.charactersCount }}</div>
-            <div class="stat-label">Charaktere</div>
+            <div class="stat-label">{{ i18nService.getTranslation('charactersCount') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">{{ databaseStats.answeredQuestionsCount }}</div>
-            <div class="stat-label">Beantwortete Fragen</div>
+            <div class="stat-label">{{ i18nService.getTranslation('answeredQuestionsCount') }}</div>
           </div>
         </div>
         <button class="btn btn-primary" (click)="loadStats()" [disabled]="loading">
-          {{ loading ? 'Lädt...' : 'Statistiken aktualisieren' }}
+          {{ loading ? i18nService.getTranslation('loading') : i18nService.getTranslation('updateStatistics') }}
         </button>
       </div>
 
       <!-- Database Management -->
       <div class="mb-4">
-        <h3>🗄️ Datenbank Management</h3>
+        <h3>🗄️ {{ i18nService.getTranslation('databaseManagement') }}</h3>
         <div class="admin-actions">
           <button 
             class="btn btn-danger" 
             (click)="clearDatabase()" 
             [disabled]="loading"
-            title="Löscht alle Daten aus der Datenbank">
-            🗑️ Datenbank leeren
+            [title]="i18nService.getTranslation('clearDatabaseTooltip')">
+            🗑️ {{ i18nService.getTranslation('clearDatabase') }}
           </button>
           <button 
             class="btn btn-success" 
             (click)="preloadExampleData()" 
             [disabled]="loading"
-            title="Lädt Beispiel-Daten in die Datenbank">
-            📥 Beispiel-Daten laden
+            [title]="i18nService.getTranslation('loadExampleDataTooltip')">
+            📥 {{ i18nService.getTranslation('loadExampleData') }}
           </button>
         </div>
       </div>
 
       <!-- Character Management -->
       <div class="mb-4">
-        <h3>👥 Charakter Management</h3>
+        <h3>👥 {{ i18nService.getTranslation('characterManagement') }}</h3>
         <div class="admin-actions">
           <button 
             class="btn btn-warning" 
             (click)="resetAllCharacters()" 
             [disabled]="loading"
-            title="Setzt alle Charaktere zurück (löscht beantwortete Fragen)">
-            🔄 Alle Charaktere zurücksetzen
+            [title]="i18nService.getTranslation('resetAllCharactersTooltip')">
+            🔄 {{ i18nService.getTranslation('resetAllCharacters') }}
           </button>
         </div>
       </div>
@@ -79,8 +80,8 @@ import { ApiService } from '../services/api.service';
           <h3>{{ confirmTitle }}</h3>
           <p>{{ confirmMessage }}</p>
           <div class="modal-actions">
-            <button class="btn btn-secondary" (click)="cancelAction()">Abbrechen</button>
-            <button class="btn btn-danger" (click)="confirmAction()">Bestätigen</button>
+            <button class="btn btn-secondary" (click)="cancelAction()">{{ i18nService.getTranslation('cancel') }}</button>
+            <button class="btn btn-danger" (click)="confirmAction()">{{ i18nService.getTranslation('confirm') }}</button>
           </div>
         </div>
       </div>
@@ -175,6 +176,8 @@ import { ApiService } from '../services/api.service';
   `]
 })
 export class AdminComponent implements OnInit {
+  public readonly i18nService = inject(I18nService);
+  
   databaseStats: any = null;
   loading = false;
   message = '';
@@ -199,15 +202,15 @@ export class AdminComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading stats:', error);
-        this.showMessage('Fehler beim Laden der Statistiken', 'error');
+        this.showMessage(this.i18nService.getTranslation('errorLoadingStats'), 'error');
         this.loading = false;
       }
     });
   }
 
   clearDatabase() {
-    this.confirmTitle = 'Datenbank leeren';
-    this.confirmMessage = 'Möchten Sie wirklich alle Daten aus der Datenbank löschen? Diese Aktion kann nicht rückgängig gemacht werden!';
+    this.confirmTitle = this.i18nService.getTranslation('confirmClearDatabase');
+    this.confirmMessage = this.i18nService.getTranslation('confirmClearDatabaseMessage');
     this.pendingAction = () => this.executeClearDatabase();
     this.showConfirmDialog = true;
   }
@@ -216,21 +219,21 @@ export class AdminComponent implements OnInit {
     this.loading = true;
     this.apiService.clearDatabase().subscribe({
       next: () => {
-        this.showMessage('Datenbank wurde erfolgreich geleert', 'success');
+        this.showMessage(this.i18nService.getTranslation('databaseCleared'), 'success');
         this.loadStats();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error clearing database:', error);
-        this.showMessage('Fehler beim Leeren der Datenbank', 'error');
+        this.showMessage(this.i18nService.getTranslation('errorClearingDatabase'), 'error');
         this.loading = false;
       }
     });
   }
 
   preloadExampleData() {
-    this.confirmTitle = 'Beispiel-Daten laden';
-    this.confirmMessage = 'Möchten Sie Beispiel-Daten in die Datenbank laden? Bestehende Daten werden nicht überschrieben.';
+    this.confirmTitle = this.i18nService.getTranslation('confirmLoadExampleData');
+    this.confirmMessage = this.i18nService.getTranslation('confirmLoadExampleDataMessage');
     this.pendingAction = () => this.executePreloadData();
     this.showConfirmDialog = true;
   }
@@ -239,21 +242,21 @@ export class AdminComponent implements OnInit {
     this.loading = true;
     this.apiService.preloadExampleData().subscribe({
       next: (result) => {
-        this.showMessage('Beispiel-Daten wurden erfolgreich geladen', 'success');
+        this.showMessage(this.i18nService.getTranslation('exampleDataLoaded'), 'success');
         this.loadStats();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error preloading data:', error);
-        this.showMessage('Fehler beim Laden der Beispiel-Daten', 'error');
+        this.showMessage(this.i18nService.getTranslation('errorLoadingExampleData'), 'error');
         this.loading = false;
       }
     });
   }
 
   resetAllCharacters() {
-    this.confirmTitle = 'Alle Charaktere zurücksetzen';
-    this.confirmMessage = 'Möchten Sie wirklich alle Charaktere zurücksetzen? Alle beantworteten Fragen werden gelöscht.';
+    this.confirmTitle = this.i18nService.getTranslation('confirmResetAllCharacters');
+    this.confirmMessage = this.i18nService.getTranslation('confirmResetAllCharactersMessage');
     this.pendingAction = () => this.executeResetAllCharacters();
     this.showConfirmDialog = true;
   }
@@ -262,13 +265,13 @@ export class AdminComponent implements OnInit {
     this.loading = true;
     this.apiService.resetAllCharacters().subscribe({
       next: () => {
-        this.showMessage('Alle Charaktere wurden erfolgreich zurückgesetzt', 'success');
+        this.showMessage(this.i18nService.getTranslation('allCharactersReset'), 'success');
         this.loadStats();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error resetting characters:', error);
-        this.showMessage('Fehler beim Zurücksetzen der Charaktere', 'error');
+        this.showMessage(this.i18nService.getTranslation('errorResettingCharacters'), 'error');
         this.loading = false;
       }
     });
