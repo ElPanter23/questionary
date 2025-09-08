@@ -514,6 +514,168 @@
   --question-card-meta-text: rgba(46, 16, 101, 0.8);
 }
 
+[data-theme="dnd"] {
+  /* D&D Pen and Paper theme variables */
+  --bg-primary: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+  --bg-secondary: #F5E6D3;
+  --text-primary: #2F1B14;
+  --text-secondary: #8B4513;
+  --text-muted: #A0522D;
+  --border-color: #CD853F;
+  --shadow: 0 20px 40px rgba(139, 69, 19, 0.3);
+  --shadow-hover: 0 8px 20px rgba(205, 133, 63, 0.4);
+  
+  /* Theme toggle variables */
+  --theme-toggle-bg: #F5E6D3;
+  --theme-toggle-bg-hover: #E6D7C3;
+  --theme-toggle-border: #CD853F;
+  --theme-toggle-border-hover: #A0522D;
+  --theme-toggle-text: #2F1B14;
+  
+  /* Language selector variables */
+  --language-label-color: #8B4513;
+  --language-select-bg: #F5E6D3;
+  --language-select-border: #CD853F;
+  --language-select-hover: #A0522D;
+  --language-select-focus: #CD853F;
+  --language-select-shadow: rgba(139, 69, 19, 0.3);
+  --language-select-text: #2F1B14;
+  --language-option-bg: #F5E6D3;
+  --language-option-text: #2F1B14;
+  
+  /* Character card variables */
+  --character-card-bg: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+  --character-card-text: #F5E6D3;
+  --character-card-border: #CD853F;
+  --character-card-shadow: 0 8px 24px rgba(139, 69, 19, 0.4);
+  --character-card-hover-shadow: 0 16px 32px rgba(205, 133, 63, 0.5);
+  --character-card-hover-border: #A0522D;
+  --character-id-bg: rgba(245, 230, 211, 0.2);
+  --character-id-text: #F5E6D3;
+  --character-meta-text: rgba(245, 230, 211, 0.9);
+  
+  /* Character modal variables */
+  --modal-bg: #F5E6D3;
+  --modal-border: #CD853F;
+  --modal-shadow: 0 20px 40px rgba(139, 69, 19, 0.4);
+  --modal-header-bg: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+  --modal-header-text: #F5E6D3;
+  --modal-header-border: rgba(245, 230, 211, 0.3);
+  --btn-close-bg: rgba(245, 230, 211, 0.3);
+  --btn-close-text: #2F1B14;
+  --btn-close-border: #CD853F;
+  --btn-close-hover-bg: rgba(205, 133, 63, 0.2);
+  --info-section-bg: #E6D7C3;
+  --info-row-border: #CD853F;
+  --info-label-text: #8B4513;
+  --info-value-text: #2F1B14;
+  --stats-title-text: #8B4513;
+  --stat-item-bg: #E6D7C3;
+  --stat-item-border: #CD853F;
+  --stat-item-hover-shadow: 0 8px 16px rgba(139, 69, 19, 0.3);
+  --stat-item-hover-border: #A0522D;
+  --stat-value-text: #A0522D;
+  --stat-label-text: #8B4513;
+  --qa-title-text: #8B4513;
+  --qa-item-bg: #E6D7C3;
+  --qa-item-border: #CD853F;
+  --qa-item-hover-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+  --qa-item-hover-border: #A0522D;
+  --qa-question-text: #2F1B14;
+  --qa-category-bg: #CD853F;
+  --qa-category-text: #F5E6D3;
+  --qa-answer-text: #8B4513;
+  --qa-date-text: #A0522D;
+  
+  /* Question card variables */
+  --question-card-bg: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+  --question-card-text: #F5E6D3;
+  --question-card-border: #CD853F;
+  --question-card-shadow: 0 8px 20px rgba(139, 69, 19, 0.3);
+  --question-card-meta-text: rgba(245, 230, 211, 0.8);
+}
+
+[data-theme="trade_republic"] {
+  /* Trade Republic theme variables */
+  --bg-primary: linear-gradient(135deg, #00D4AA 0%, #00B894 50%, #00A085 100%);
+  --bg-secondary: #F0FDFA;
+  --text-primary: #0D4A3A;
+  --text-secondary: #00A085;
+  --text-muted: #00B894;
+  --border-color: #00D4AA;
+  --shadow: 0 20px 40px rgba(0, 212, 170, 0.3);
+  --shadow-hover: 0 8px 20px rgba(0, 184, 148, 0.4);
+  
+  /* Theme toggle variables */
+  --theme-toggle-bg: #F0FDFA;
+  --theme-toggle-bg-hover: #E0F8F3;
+  --theme-toggle-border: #00D4AA;
+  --theme-toggle-border-hover: #00B894;
+  --theme-toggle-text: #0D4A3A;
+  
+  /* Language selector variables */
+  --language-label-color: #00A085;
+  --language-select-bg: #F0FDFA;
+  --language-select-border: #00D4AA;
+  --language-select-hover: #00B894;
+  --language-select-focus: #00D4AA;
+  --language-select-shadow: rgba(0, 212, 170, 0.3);
+  --language-select-text: #0D4A3A;
+  --language-option-bg: #F0FDFA;
+  --language-option-text: #0D4A3A;
+  
+  /* Character card variables */
+  --character-card-bg: linear-gradient(135deg, #00D4AA 0%, #00B894 50%, #00A085 100%);
+  --character-card-text: #F0FDFA;
+  --character-card-border: #00D4AA;
+  --character-card-shadow: 0 8px 24px rgba(0, 212, 170, 0.4);
+  --character-card-hover-shadow: 0 16px 32px rgba(0, 184, 148, 0.5);
+  --character-card-hover-border: #00B894;
+  --character-id-bg: rgba(240, 253, 250, 0.2);
+  --character-id-text: #F0FDFA;
+  --character-meta-text: rgba(240, 253, 250, 0.9);
+  
+  /* Character modal variables */
+  --modal-bg: #F0FDFA;
+  --modal-border: #00D4AA;
+  --modal-shadow: 0 20px 40px rgba(0, 212, 170, 0.4);
+  --modal-header-bg: linear-gradient(135deg, #00D4AA 0%, #00B894 50%, #00A085 100%);
+  --modal-header-text: #F0FDFA;
+  --modal-header-border: rgba(240, 253, 250, 0.3);
+  --btn-close-bg: rgba(240, 253, 250, 0.3);
+  --btn-close-text: #0D4A3A;
+  --btn-close-border: #00D4AA;
+  --btn-close-hover-bg: rgba(0, 212, 170, 0.2);
+  --info-section-bg: #E0F8F3;
+  --info-row-border: #00D4AA;
+  --info-label-text: #00A085;
+  --info-value-text: #0D4A3A;
+  --stats-title-text: #00A085;
+  --stat-item-bg: #E0F8F3;
+  --stat-item-border: #00D4AA;
+  --stat-item-hover-shadow: 0 8px 16px rgba(0, 212, 170, 0.3);
+  --stat-item-hover-border: #00B894;
+  --stat-value-text: #00B894;
+  --stat-label-text: #00A085;
+  --qa-title-text: #00A085;
+  --qa-item-bg: #E0F8F3;
+  --qa-item-border: #00D4AA;
+  --qa-item-hover-shadow: 0 4px 8px rgba(0, 212, 170, 0.3);
+  --qa-item-hover-border: #00B894;
+  --qa-question-text: #0D4A3A;
+  --qa-category-bg: #00D4AA;
+  --qa-category-text: #F0FDFA;
+  --qa-answer-text: #00A085;
+  --qa-date-text: #00B894;
+  
+  /* Question card variables */
+  --question-card-bg: linear-gradient(135deg, #00D4AA 0%, #00B894 50%, #00A085 100%);
+  --question-card-text: #F0FDFA;
+  --question-card-border: #00D4AA;
+  --question-card-shadow: 0 8px 20px rgba(0, 212, 170, 0.3);
+  --question-card-meta-text: rgba(240, 253, 250, 0.8);
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-primary);
@@ -1163,6 +1325,279 @@ body {
 @keyframes spaceTextGlow {
   0%, 100% { text-shadow: 0 0 10px rgba(139, 43, 226, 0.3); }
   50% { text-shadow: 0 0 20px rgba(139, 43, 226, 0.6), 0 0 30px rgba(106, 13, 173, 0.4); }
+}
+
+/* D&D Easter Egg Effects */
+[data-theme="dnd"] {
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(160, 82, 45, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(205, 133, 63, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: dndParchment 8s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(139, 69, 19, 0.05) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(205, 133, 63, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    animation: dndScroll 12s linear infinite;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(205, 133, 63, 0.1) 50%, transparent 70%);
+    animation: dndGlow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .character-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(160, 82, 45, 0.1) 50%, transparent 70%);
+    animation: dndMagic 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 230, 211, 0.3), transparent);
+    animation: dndShimmer 2s ease-in-out infinite;
+  }
+  
+  .btn:hover {
+    box-shadow: 
+      0 0 20px rgba(205, 133, 63, 0.5),
+      0 0 40px rgba(160, 82, 45, 0.3),
+      inset 0 0 20px rgba(139, 69, 19, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
+    animation: dndTextGlow 4s ease-in-out infinite;
+  }
+}
+
+/* Trade Republic Easter Egg Effects */
+[data-theme="trade_republic"] {
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 184, 148, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(0, 160, 133, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: tradeFloat 6s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(0, 212, 170, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    animation: tradeFlow 8s linear infinite;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 170, 0.1) 50%, transparent 70%);
+    animation: tradeGlow 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .character-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 184, 148, 0.1) 50%, transparent 70%);
+    animation: tradePulse 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(240, 253, 250, 0.3), transparent);
+    animation: tradeShimmer 2s ease-in-out infinite;
+  }
+  
+  .btn:hover {
+    box-shadow: 
+      0 0 20px rgba(0, 212, 170, 0.5),
+      0 0 40px rgba(0, 184, 148, 0.3),
+      inset 0 0 20px rgba(0, 160, 133, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px rgba(0, 212, 170, 0.3);
+    animation: tradeTextGlow 3s ease-in-out infinite;
+  }
+}
+
+/* D&D Animations */
+@keyframes dndParchment {
+  0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.02) rotate(0.5deg); }
+}
+
+@keyframes dndScroll {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes dndGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes dndMagic {
+  0%, 100% { opacity: 0; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.05) rotate(2deg); }
+}
+
+@keyframes dndShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes dndTextGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(139, 69, 19, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(139, 69, 19, 0.6), 0 0 30px rgba(205, 133, 63, 0.4); }
+}
+
+/* Trade Republic Animations */
+@keyframes tradeFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.02); }
+}
+
+@keyframes tradeFlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes tradeGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes tradePulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes tradeShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes tradeTextGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 170, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(0, 212, 170, 0.6), 0 0 30px rgba(0, 184, 148, 0.4); }
 }
 
 .container {

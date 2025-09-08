@@ -21,7 +21,7 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this._keydownListener = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key >= '1' && event.key <= '5') {
+      if (event.ctrlKey && event.key >= '1' && event.key <= '7') {
         this._lastPressedNumber = parseInt(event.key);
         // Clear any existing timeout
         if (this._numberKeyTimeout) {
@@ -35,7 +35,7 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
     };
     
     this._keyupListener = (event: KeyboardEvent) => {
-      if (event.key >= '1' && event.key <= '5') {
+      if (event.key >= '1' && event.key <= '7') {
         // Keep the number for a bit longer after keyup
         if (this._numberKeyTimeout) {
           clearTimeout(this._numberKeyTimeout);
@@ -64,10 +64,10 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   
   public onThemeToggle(event: MouseEvent): void {
     if (event.ctrlKey) {
-      // Check for number keys (1-5) for different easter egg themes
-      const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+      // Check for number keys (1-7) for different easter egg themes
+      const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic'];
       
-      if (this._lastPressedNumber >= 1 && this._lastPressedNumber <= 5) {
+      if (this._lastPressedNumber >= 1 && this._lastPressedNumber <= 7) {
         this.themeService.setEasterEggTheme(easterEggThemes[this._lastPressedNumber - 1] as any);
         this._lastPressedNumber = 0; // Reset after use
       } else {
@@ -91,7 +91,9 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
         'kawaii': 'KAWAII MODE',
         'ocean': 'OCEAN MODE',
         'fire': 'FIRE MODE',
-        'space': 'SPACE MODE'
+        'space': 'SPACE MODE',
+        'dnd': 'DND MODE',
+        'trade_republic': 'TRADE REPUBLIC MODE'
       };
       return themeNames[easterEggTheme] || 'EASTER EGG';
     }

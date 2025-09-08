@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark' | 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space';
+export type Theme = 'light' | 'dark' | 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space' | 'dnd' | 'trade_republic';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ThemeService {
   
   private _initializeTheme(): void {
     const savedTheme = localStorage.getItem('theme') as Theme;
-    const validThemes = ['light', 'dark', 'cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    const validThemes = ['light', 'dark', 'cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic'];
     if (savedTheme && validThemes.includes(savedTheme)) {
       this._sTheme.set(savedTheme);
     } else {
@@ -42,7 +42,7 @@ export class ThemeService {
     this._applyTheme();
   }
   
-  public setEasterEggTheme(theme: 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space'): void {
+  public setEasterEggTheme(theme: 'cyberpunk' | 'kawaii' | 'ocean' | 'fire' | 'space' | 'dnd' | 'trade_republic'): void {
     this._sTheme.set(theme);
     localStorage.setItem('theme', theme);
     this._applyTheme();
@@ -67,7 +67,9 @@ export class ThemeService {
       'kawaii': '#ffb6c1',
       'ocean': '#006994',
       'fire': '#ff4500',
-      'space': '#4b0082'
+      'space': '#4b0082',
+      'dnd': '#8B4513',
+      'trade_republic': '#00D4AA'
     };
     
     const themeColor = themeColors[theme] || '#667eea';
@@ -91,12 +93,12 @@ export class ThemeService {
   }
   
   public isEasterEggMode(): boolean {
-    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic'];
     return easterEggThemes.includes(this._sTheme());
   }
   
   public getEasterEggTheme(): string | null {
-    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space'];
+    const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic'];
     return easterEggThemes.includes(this._sTheme()) ? this._sTheme() : null;
   }
 }
