@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  question-tool:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_PATH=./server/database/questions.db
+      - CORS_ORIGIN=http://localhost:3000
+    volumes:
+      - question-tool-data:/app/server/database
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  question-tool-data:
