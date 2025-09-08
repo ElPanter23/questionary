@@ -1,0 +1,13 @@
+/* Questions Component Styles */
+.card {
+  margin-bottom: 16px;
+}
+
+.card h4 {
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.status-badge-margin {
+  margin-left: 8px;
+}

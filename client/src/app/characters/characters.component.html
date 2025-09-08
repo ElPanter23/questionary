@@ -1,0 +1,206 @@
+<div class="card">
+  <h2 class="text-center mb-4">👥 {{ i18nService.getTranslation('manageCharactersTitle') }}</h2>
+  
+  <!-- Neuen Charakter hinzufügen -->
+  <div class="mb-4">
+    <h3>{{ i18nService.getTranslation('addNewCharacter') }}</h3>
+    <form (ngSubmit)="addCharacter()" #characterForm="ngForm">
+      <div class="form-group">
+        <label class="form-label" for="name">{{ i18nService.getTranslation('name') }} *</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-control" 
+          [(ngModel)]="newCharacter.name" 
+          required
+          [placeholder]="i18nService.getTranslation('placeholderCharacterName')">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="description">{{ i18nService.getTranslation('description') }}</label>
+        <textarea 
+          id="description" 
+          name="description" 
+          class="form-control textarea" 
+          [(ngModel)]="newCharacter.description"
+          [placeholder]="i18nService.getTranslation('placeholderCharacterDescription')"></textarea>
+      </div>
+      
+      <button type="submit" class="btn" [disabled]="!characterForm.form.valid || loading">
+        {{ loading ? i18nService.getTranslation('adding') : i18nService.getTranslation('addCharacter') }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Charaktere-Liste -->
+  <div>
+    <h3>{{ i18nService.getTranslation('existingCharacters') }} ({{ characters.length }})</h3>
+    
+    <div *ngIf="characters.length === 0" class="text-center">
+      <p>{{ i18nService.getTranslation('noCharactersYet') }}</p>
+    </div>
+    
+    <div class="grid grid-2" *ngIf="characters.length > 0">
+      <div *ngFor="let character of characters" class="character-card">
+        <div class="character-header">
+          <h3>{{ character.name }}</h3>
+          <span class="character-id">#{{ character.id }}</span>
+        </div>
+        <p class="character-description">{{ character.description || i18nService.getTranslation('noDescription') }}</p>
+        <div class="character-meta">
+          <small class="text-muted">
+            {{ i18nService.getTranslation('created') }} {{ formatDate(character.created_at) }}
+          </small>
+        </div>
+        <div class="character-actions mt-4">
+          <button (click)="viewCharacterDetails(character)" class="btn-details" [title]="i18nService.getTranslation('characterDetails')">
+            👁️ {{ i18nService.getTranslation('details') }}
+          </button>
+          <button (click)="editCharacter(character)" class="btn-edit">
+            ✏️ {{ i18nService.getTranslation('editCharacter') }}
+          </button>
+          <button (click)="deleteCharacter(character.id)" class="btn-delete">
+            🗑️ {{ i18nService.getTranslation('delete') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bearbeiten-Modal -->
+  <div *ngIf="editingCharacter" class="card mt-4">
+    <h3>{{ i18nService.getTranslation('editCharacterTitle') }}</h3>
+    <form (ngSubmit)="updateCharacter()" #editForm="ngForm">
+      <div class="form-group">
+        <label class="form-label" for="editName">{{ i18nService.getTranslation('name') }} *</label>
+        <input 
+          type="text" 
+          id="editName" 
+          name="editName" 
+          class="form-control" 
+          [(ngModel)]="editingCharacter.name" 
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label" for="editDescription">{{ i18nService.getTranslation('description') }}</label>
+        <textarea 
+          id="editDescription" 
+          name="editDescription" 
+          class="form-control textarea" 
+          [(ngModel)]="editingCharacter.description"></textarea>
+      </div>
+      
+      <div>
+        <button type="submit" class="btn" [disabled]="!editForm.form.valid || loading">
+          {{ loading ? i18nService.getTranslation('saving') : i18nService.getTranslation('save') }}
+        </button>
+        <button type="button" class="btn btn-secondary btn-margin-left" (click)="cancelEdit()">
+          {{ i18nService.getTranslation('cancel') }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lade-Status -->
+  <div *ngIf="loading && !editingCharacter" class="loading">
+    <p>{{ i18nService.getTranslation('loading') }}</p>
+  </div>
+
+  <!-- Fehler -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <!-- Erfolg -->
+  <div *ngIf="successMessage" class="success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Charakter-Details Modal -->
+  <div *ngIf="selectedCharacter" class="card mt-4 character-details-modal">
+    <div class="character-details-header">
+      <h2>{{ selectedCharacter.name }} - {{ i18nService.getTranslation('characterDetails') }}</h2>
+      <button class="btn btn-secondary" (click)="closeCharacterDetails()">
+        ✕ {{ i18nService.getTranslation('close') }}
+      </button>
+    </div>
+    
+    <div class="character-details-content">
+      <div class="character-info">
+        <div class="info-row">
+          <label>{{ i18nService.getTranslation('id') }}</label>
+          <span>#{{ selectedCharacter.id }}</span>
+        </div>
+        <div class="info-row">
+          <label>{{ i18nService.getTranslation('name') }}:</label>
+          <span>{{ selectedCharacter.name }}</span>
+        </div>
+        <div class="info-row">
+          <label>{{ i18nService.getTranslation('description') }}:</label>
+          <span>{{ selectedCharacter.description || i18nService.getTranslation('noDescription') }}</span>
+        </div>
+        <div class="info-row">
+          <label>{{ i18nService.getTranslation('created') }}:</label>
+          <span>{{ formatDate(selectedCharacter.created_at) }}</span>
+        </div>
+      </div>
+      
+      <div class="character-stats" *ngIf="characterStats">
+        <h3>{{ i18nService.getTranslation('statistics') }}</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">{{ characterStats.answered_count || 0 }}</div>
+            <div class="stat-label">{{ i18nService.getTranslation('answeredQuestions') }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ characterStats.total_questions || 0 }}</div>
+            <div class="stat-label">{{ i18nService.getTranslation('availableQuestions') }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">{{ getProgressPercentage() }}%</div>
+            <div class="stat-label">{{ i18nService.getTranslation('progress') }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="character-actions-details">
+        <button class="btn btn-primary" (click)="startGameWithCharacter(selectedCharacter)">
+          🎮 {{ i18nService.getTranslation('startGame') }}
+        </button>
+        <button class="btn btn-secondary" (click)="editCharacter(selectedCharacter)">
+          ✏️ {{ i18nService.getTranslation('editCharacter') }}
+        </button>
+        <button class="btn btn-warning" (click)="resetCharacterProgress(selectedCharacter.id)">
+          🔄 {{ i18nService.getTranslation('resetProgress') }}
+        </button>
+      </div>
+      
+      <div class="character-qa-history" *ngIf="characterAnswers.length > 0">
+        <h3>{{ i18nService.getTranslation('questionsAndAnswers') }} ({{ characterAnswers.length }})</h3>
+        <div class="qa-list">
+          <div *ngFor="let answer of characterAnswers" class="qa-item">
+            <div class="qa-question">
+              <strong>{{ i18nService.getTranslation('questions') }} #{{ answer.id }}:</strong> {{ answer.question.text }}
+              <span *ngIf="answer.question.category" class="qa-category">{{ answer.question.category }}</span>
+            </div>
+            <div class="qa-answer">
+              <strong>{{ i18nService.getTranslation('yourAnswer') }}:</strong> {{ answer.answer_text }}
+            </div>
+            <div class="qa-meta">
+              <small class="text-muted">
+                {{ i18nService.getTranslation('answeredOn') }} {{ formatDate(answer.answered_at) }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="character-qa-history" *ngIf="characterAnswers.length === 0 && characterStats && characterStats.answered_count === 0">
+        <h3>{{ i18nService.getTranslation('questionsAndAnswers') }}</h3>
+        <p class="text-muted">{{ i18nService.getTranslation('noQuestionsAnsweredYet') }}</p>
+      </div>
+    </div>
+  </div>
+</div>

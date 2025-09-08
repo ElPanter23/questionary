@@ -1,0 +1,80 @@
+<div class="card">
+  <h2 class="text-center mb-4">🔧 {{ i18nService.getTranslation('adminInterface') }}</h2>
+  
+  <!-- Database Statistics -->
+  <div class="mb-4">
+    <h3>📊 {{ i18nService.getTranslation('databaseStatistics') }}</h3>
+    <div class="grid grid-3 gap-3" *ngIf="databaseStats">
+      <div class="stat-card">
+        <div class="stat-number">{{ databaseStats.questionsCount }}</div>
+        <div class="stat-label">{{ i18nService.getTranslation('questionsCount') }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ databaseStats.charactersCount }}</div>
+        <div class="stat-label">{{ i18nService.getTranslation('charactersCount') }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ databaseStats.answeredQuestionsCount }}</div>
+        <div class="stat-label">{{ i18nService.getTranslation('answeredQuestionsCount') }}</div>
+      </div>
+    </div>
+    <p>
+      <br>
+      <button class="btn btn-primary" (click)="loadStats()" [disabled]="loading">
+        {{ loading ? i18nService.getTranslation('loading') : i18nService.getTranslation('updateStatistics') }}
+      </button>
+    </p>
+  </div>
+
+  <!-- Database Management -->
+  <div class="mb-4">
+    <h3>🗄️ {{ i18nService.getTranslation('databaseManagement') }}</h3>
+    <div class="admin-actions">
+      <button 
+        class="btn btn-danger" 
+        (click)="clearDatabase()" 
+        [disabled]="loading"
+        [title]="i18nService.getTranslation('clearDatabaseTooltip')">
+        🗑️ {{ i18nService.getTranslation('clearDatabase') }}
+      </button>
+      <button 
+        class="btn btn-success" 
+        (click)="preloadExampleData()" 
+        [disabled]="loading"
+        [title]="i18nService.getTranslation('loadExampleDataTooltip')">
+        📥 {{ i18nService.getTranslation('loadExampleData') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Character Management -->
+  <div class="mb-4">
+    <h3>👥 {{ i18nService.getTranslation('characterManagement') }}</h3>
+    <div class="admin-actions">
+      <button 
+        class="btn btn-warning" 
+        (click)="resetAllCharacters()" 
+        [disabled]="loading"
+        [title]="i18nService.getTranslation('resetAllCharactersTooltip')">
+        🔄 {{ i18nService.getTranslation('resetAllCharacters') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Status Messages -->
+  <div *ngIf="message" class="alert" [ngClass]="messageType === 'success' ? 'alert-success' : 'alert-danger'">
+    {{ message }}
+  </div>
+
+  <!-- Confirmation Dialog -->
+  <div *ngIf="showConfirmDialog" class="modal-overlay">
+    <div class="modal">
+      <h3>{{ confirmTitle }}</h3>
+      <p>{{ confirmMessage }}</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="cancelAction()">{{ i18nService.getTranslation('cancel') }}</button>
+        <button class="btn btn-danger" (click)="confirmAction()">{{ i18nService.getTranslation('confirm') }}</button>
+      </div>
+    </div>
+  </div>
+</div>

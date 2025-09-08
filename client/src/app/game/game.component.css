@@ -1,0 +1,46 @@
+/* Game Component Styles */
+.selected {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(240, 147, 251, 0.4) !important;
+}
+
+.character-card {
+  position: relative;
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+}
+
+.selected:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.answer-section {
+  margin: 20px 0;
+}
+
+.answer-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.answer-counter {
+  text-align: right;
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.btn-margin-left {
+  margin-left: 12px;
+}

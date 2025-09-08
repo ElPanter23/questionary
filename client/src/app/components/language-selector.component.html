@@ -1,0 +1,16 @@
+<div class="language-selector">
+  <select 
+    id="language-select"
+    class="language-select"
+    [value]="currentLanguage()"
+    (change)="onLanguageChange($event)"
+    [title]="i18nService.getTranslation('selectLanguage')"
+  >
+    <option 
+      *ngFor="let lang of availableLanguages" 
+      [value]="lang.code"
+    >
+      {{ lang.flag }} {{ lang.name }}
+    </option>
+  </select>
+</div>

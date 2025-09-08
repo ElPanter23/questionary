@@ -1,0 +1,19 @@
+<button 
+  class="theme-toggle"
+  (click)="onThemeToggle($event)"
+  [title]="getToggleTitle()"
+  [attr.aria-label]="getToggleTitle()"
+>
+  <span class="theme-icon">
+    <span class="sun-icon" [class.hidden]="themeService.isDarkMode() || themeService.isEasterEggMode()">☀️</span>
+    <span class="moon-icon" [class.hidden]="themeService.isLightMode() || themeService.isEasterEggMode()">🌙</span>
+    <span class="cyber-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'cyberpunk'">⚡</span>
+    <span class="kawaii-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'kawaii'">🌸</span>
+    <span class="ocean-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'ocean'">🌊</span>
+    <span class="fire-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'fire'">🔥</span>
+    <span class="space-icon" [class.hidden]="!themeService.isEasterEggMode() || themeService.getEasterEggTheme() !== 'space'">🌌</span>
+  </span>
+  <span class="theme-text">
+    {{ getCurrentThemeText() }}
+  </span>
+</button>
