@@ -70,7 +70,7 @@ import { I18nService } from '../services/i18n.service';
             maxlength="1000">
           </textarea>
           <div class="answer-counter">
-            {{ currentAnswer?.length || 0 }} / 1000 {{ i18nService.getTranslation('characters') }}
+            {{ currentAnswer.length || 0 }} / 1000 {{ i18nService.getTranslation('characters') }}
           </div>
         </div>
         
@@ -322,7 +322,7 @@ export class GameComponent implements OnInit {
   loadAvailableSeasons() {
     // For now, we'll use seasons 1-5 as available seasons
     // In a real implementation, this could be loaded from the API
-    this.availableSeasons = [1, 2, 3, 4, 5];
+    this.availableSeasons = [1, 2, 3, 4];
   }
 
   onSeasonChange() {

@@ -48,7 +48,7 @@ import { I18nService } from '../services/i18n.service';
                 class="form-control" 
                 [(ngModel)]="newQuestion.difficulty"
                 min="1" 
-                max="5"
+                max="4"
                 [placeholder]="i18nService.getTranslation('placeholderSeason')">
             </div>
           </div>
@@ -153,7 +153,7 @@ import { I18nService } from '../services/i18n.service';
                   class="form-control" 
                   [(ngModel)]="customDifficulty"
                   min="1" 
-                  max="5">
+                  max="4">
               </div>
             </div>
             
