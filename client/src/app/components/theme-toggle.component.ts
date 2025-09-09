@@ -21,8 +21,8 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this._keydownListener = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key >= '1' && event.key <= '7') {
-        this._lastPressedNumber = parseInt(event.key);
+      if (event.ctrlKey && (event.key >= '1' && event.key <= '9' || event.key === '0')) {
+        this._lastPressedNumber = event.key === '0' ? 10 : parseInt(event.key);
         // Clear any existing timeout
         if (this._numberKeyTimeout) {
           clearTimeout(this._numberKeyTimeout);
@@ -35,7 +35,7 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
     };
     
     this._keyupListener = (event: KeyboardEvent) => {
-      if (event.key >= '1' && event.key <= '7') {
+      if (event.key >= '1' && event.key <= '9' || event.key === '0') {
         // Keep the number for a bit longer after keyup
         if (this._numberKeyTimeout) {
           clearTimeout(this._numberKeyTimeout);
@@ -64,10 +64,10 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
   
   public onThemeToggle(event: MouseEvent): void {
     if (event.ctrlKey) {
-      // Check for number keys (1-7) for different easter egg themes
-      const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic'];
+      // Check for number keys (1-9, 0) for different easter egg themes
+      const easterEggThemes = ['cyberpunk', 'kawaii', 'ocean', 'fire', 'space', 'dnd', 'trade_republic', 'minecraft', 'starwars', 'synthwave'];
       
-      if (this._lastPressedNumber >= 1 && this._lastPressedNumber <= 7) {
+      if (this._lastPressedNumber >= 1 && this._lastPressedNumber <= 10) {
         this.themeService.setEasterEggTheme(easterEggThemes[this._lastPressedNumber - 1] as any);
         this._lastPressedNumber = 0; // Reset after use
       } else {
@@ -93,7 +93,10 @@ export class ThemeToggleComponent implements OnInit, OnDestroy {
         'fire': 'FIRE MODE',
         'space': 'SPACE MODE',
         'dnd': 'DND MODE',
-        'trade_republic': 'TRADE REPUBLIC MODE'
+        'trade_republic': 'TRADE REPUBLIC MODE',
+        'minecraft': 'MINECRAFT MODE',
+        'starwars': 'STAR WARS MODE',
+        'synthwave': 'SYNTHWAVE MODE'
       };
       return themeNames[easterEggTheme] || 'EASTER EGG';
     }

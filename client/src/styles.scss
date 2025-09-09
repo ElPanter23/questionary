@@ -676,6 +676,249 @@
   --question-card-meta-text: rgba(240, 253, 250, 0.8);
 }
 
+[data-theme="minecraft"] {
+  /* Minecraft theme variables - blocky and pixelated */
+  --bg-primary: linear-gradient(135deg, #4a7c59 0%, #5a8c69 50%, #6a9c79 100%);
+  --bg-secondary: #8FBC8F;
+  --text-primary: #2F4F2F;
+  --text-secondary: #3E5F3E;
+  --text-muted: #556B55;
+  --border-color: #2F4F2F;
+  --shadow: 0 8px 16px rgba(47, 79, 47, 0.4);
+  --shadow-hover: 0 12px 24px rgba(47, 79, 47, 0.6);
+  
+  /* Theme toggle variables */
+  --theme-toggle-bg: #8FBC8F;
+  --theme-toggle-bg-hover: #7AAC7A;
+  --theme-toggle-border: #2F4F2F;
+  --theme-toggle-border-hover: #1F3F1F;
+  --theme-toggle-text: #2F4F2F;
+  
+  /* Language selector variables */
+  --language-label-color: #3E5F3E;
+  --language-select-bg: #8FBC8F;
+  --language-select-border: #2F4F2F;
+  --language-select-hover: #1F3F1F;
+  --language-select-focus: #2F4F2F;
+  --language-select-shadow: rgba(47, 79, 47, 0.3);
+  --language-select-text: #2F4F2F;
+  --language-option-bg: #8FBC8F;
+  --language-option-text: #2F4F2F;
+  
+  /* Character card variables */
+  --character-card-bg: linear-gradient(135deg, #4a7c59 0%, #5a8c69 50%, #6a9c79 100%);
+  --character-card-text: #F0F8F0;
+  --character-card-border: #2F4F2F;
+  --character-card-shadow: 0 8px 16px rgba(47, 79, 47, 0.5);
+  --character-card-hover-shadow: 0 16px 32px rgba(47, 79, 47, 0.7);
+  --character-card-hover-border: #1F3F1F;
+  --character-id-bg: rgba(47, 79, 47, 0.3);
+  --character-id-text: #F0F8F0;
+  --character-meta-text: rgba(240, 248, 240, 0.9);
+  
+  /* Character modal variables */
+  --modal-bg: #8FBC8F;
+  --modal-border: #2F4F2F;
+  --modal-shadow: 0 16px 32px rgba(47, 79, 47, 0.5);
+  --modal-header-bg: linear-gradient(135deg, #4a7c59 0%, #5a8c69 50%, #6a9c79 100%);
+  --modal-header-text: #F0F8F0;
+  --modal-header-border: rgba(47, 79, 47, 0.3);
+  --btn-close-bg: rgba(47, 79, 47, 0.3);
+  --btn-close-text: #F0F8F0;
+  --btn-close-border: #2F4F2F;
+  --btn-close-hover-bg: rgba(47, 79, 47, 0.5);
+  --info-section-bg: #7AAC7A;
+  --info-row-border: #2F4F2F;
+  --info-label-text: #2F4F2F;
+  --info-value-text: #3E5F3E;
+  --stats-title-text: #2F4F2F;
+  --stat-item-bg: #7AAC7A;
+  --stat-item-border: #2F4F2F;
+  --stat-item-hover-shadow: 0 8px 16px rgba(47, 79, 47, 0.4);
+  --stat-item-hover-border: #1F3F1F;
+  --stat-value-text: #4a7c59;
+  --stat-label-text: #2F4F2F;
+  --qa-title-text: #2F4F2F;
+  --qa-item-bg: #7AAC7A;
+  --qa-item-border: #2F4F2F;
+  --qa-item-hover-shadow: 0 4px 8px rgba(47, 79, 47, 0.4);
+  --qa-item-hover-border: #1F3F1F;
+  --qa-question-text: #2F4F2F;
+  --qa-category-bg: #4a7c59;
+  --qa-category-text: #F0F8F0;
+  --qa-answer-text: #3E5F3E;
+  --qa-date-text: #556B55;
+  
+  /* Question card variables */
+  --question-card-bg: linear-gradient(135deg, #4a7c59 0%, #5a8c69 50%, #6a9c79 100%);
+  --question-card-text: #F0F8F0;
+  --question-card-border: #2F4F2F;
+  --question-card-shadow: 0 8px 16px rgba(47, 79, 47, 0.4);
+  --question-card-meta-text: rgba(240, 248, 240, 0.8);
+}
+
+[data-theme="starwars"] {
+  /* Star Wars theme variables - golden and space aesthetic */
+  --bg-primary: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+  --bg-secondary: #0f0f23;
+  --text-primary: #FFD700;
+  --text-secondary: #FFA500;
+  --text-muted: #FF8C00;
+  --border-color: #FFD700;
+  --shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+  --shadow-hover: 0 12px 24px rgba(255, 215, 0, 0.5);
+  
+  /* Theme toggle variables */
+  --theme-toggle-bg: #0f0f23;
+  --theme-toggle-bg-hover: #1a1a2e;
+  --theme-toggle-border: #FFD700;
+  --theme-toggle-border-hover: #FFA500;
+  --theme-toggle-text: #FFD700;
+  
+  /* Language selector variables */
+  --language-label-color: #FFA500;
+  --language-select-bg: #0f0f23;
+  --language-select-border: #FFD700;
+  --language-select-hover: #FFA500;
+  --language-select-focus: #FFD700;
+  --language-select-shadow: rgba(255, 215, 0, 0.3);
+  --language-select-text: #FFD700;
+  --language-option-bg: #0f0f23;
+  --language-option-text: #FFD700;
+  
+  /* Character card variables */
+  --character-card-bg: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+  --character-card-text: #FFD700;
+  --character-card-border: #FFD700;
+  --character-card-shadow: 0 8px 16px rgba(255, 215, 0, 0.4);
+  --character-card-hover-shadow: 0 16px 32px rgba(255, 215, 0, 0.6);
+  --character-card-hover-border: #FFA500;
+  --character-id-bg: rgba(255, 215, 0, 0.2);
+  --character-id-text: #000000;
+  --character-meta-text: rgba(255, 215, 0, 0.9);
+  
+  /* Character modal variables */
+  --modal-bg: #0f0f23;
+  --modal-border: #FFD700;
+  --modal-shadow: 0 16px 32px rgba(255, 215, 0, 0.4);
+  --modal-header-bg: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+  --modal-header-text: #FFD700;
+  --modal-header-border: rgba(255, 215, 0, 0.3);
+  --btn-close-bg: rgba(255, 215, 0, 0.2);
+  --btn-close-text: #FFD700;
+  --btn-close-border: #FFD700;
+  --btn-close-hover-bg: rgba(255, 215, 0, 0.3);
+  --info-section-bg: #1a1a2e;
+  --info-row-border: #FFD700;
+  --info-label-text: #FFA500;
+  --info-value-text: #FFD700;
+  --stats-title-text: #FFA500;
+  --stat-item-bg: #1a1a2e;
+  --stat-item-border: #FFD700;
+  --stat-item-hover-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+  --stat-item-hover-border: #FFA500;
+  --stat-value-text: #FFD700;
+  --stat-label-text: #FFA500;
+  --qa-title-text: #FFA500;
+  --qa-item-bg: #1a1a2e;
+  --qa-item-border: #FFD700;
+  --qa-item-hover-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+  --qa-item-hover-border: #FFA500;
+  --qa-question-text: #FFD700;
+  --qa-category-bg: #FFD700;
+  --qa-category-text: #000000;
+  --qa-answer-text: #FFA500;
+  --qa-date-text: #FF8C00;
+  
+  /* Question card variables */
+  --question-card-bg: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+  --question-card-text: #FFD700;
+  --question-card-border: #FFD700;
+  --question-card-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+  --question-card-meta-text: rgba(255, 215, 0, 0.8);
+}
+
+[data-theme="synthwave"] {
+  /* Synthwave theme variables - neon and retro aesthetic */
+  --bg-primary: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #2d1b69 100%);
+  --bg-secondary: #0d0d0d;
+  --text-primary: #ff00ff;
+  --text-secondary: #00ffff;
+  --text-muted: #ff0080;
+  --border-color: #ff00ff;
+  --shadow: 0 8px 16px rgba(255, 0, 255, 0.3);
+  --shadow-hover: 0 12px 24px rgba(255, 0, 255, 0.5);
+  
+  /* Theme toggle variables */
+  --theme-toggle-bg: #0d0d0d;
+  --theme-toggle-bg-hover: #1a0033;
+  --theme-toggle-border: #ff00ff;
+  --theme-toggle-border-hover: #00ffff;
+  --theme-toggle-text: #ff00ff;
+  
+  /* Language selector variables */
+  --language-label-color: #00ffff;
+  --language-select-bg: #0d0d0d;
+  --language-select-border: #ff00ff;
+  --language-select-hover: #00ffff;
+  --language-select-focus: #ff00ff;
+  --language-select-shadow: rgba(255, 0, 255, 0.3);
+  --language-select-text: #ff00ff;
+  --language-option-bg: #0d0d0d;
+  --language-option-text: #ff00ff;
+  
+  /* Character card variables */
+  --character-card-bg: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ff0080 100%);
+  --character-card-text: #000000;
+  --character-card-border: #ff00ff;
+  --character-card-shadow: 0 8px 16px rgba(255, 0, 255, 0.4);
+  --character-card-hover-shadow: 0 16px 32px rgba(0, 255, 255, 0.6);
+  --character-card-hover-border: #00ffff;
+  --character-id-bg: rgba(0, 0, 0, 0.8);
+  --character-id-text: #ff00ff;
+  --character-meta-text: rgba(0, 0, 0, 0.8);
+  
+  /* Character modal variables */
+  --modal-bg: #0d0d0d;
+  --modal-border: #ff00ff;
+  --modal-shadow: 0 16px 32px rgba(255, 0, 255, 0.4);
+  --modal-header-bg: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ff0080 100%);
+  --modal-header-text: #000000;
+  --modal-header-border: rgba(0, 0, 0, 0.3);
+  --btn-close-bg: rgba(0, 0, 0, 0.8);
+  --btn-close-text: #ff00ff;
+  --btn-close-border: #ff00ff;
+  --btn-close-hover-bg: rgba(255, 0, 255, 0.2);
+  --info-section-bg: #1a0033;
+  --info-row-border: #ff00ff;
+  --info-label-text: #00ffff;
+  --info-value-text: #ff00ff;
+  --stats-title-text: #00ffff;
+  --stat-item-bg: #1a0033;
+  --stat-item-border: #ff00ff;
+  --stat-item-hover-shadow: 0 8px 16px rgba(255, 0, 255, 0.3);
+  --stat-item-hover-border: #00ffff;
+  --stat-value-text: #ff0080;
+  --stat-label-text: #00ffff;
+  --qa-title-text: #00ffff;
+  --qa-item-bg: #1a0033;
+  --qa-item-border: #ff00ff;
+  --qa-item-hover-shadow: 0 4px 8px rgba(255, 0, 255, 0.3);
+  --qa-item-hover-border: #00ffff;
+  --qa-question-text: #ff00ff;
+  --qa-category-bg: #ff0080;
+  --qa-category-text: #000000;
+  --qa-answer-text: #00ffff;
+  --qa-date-text: #ff0080;
+  
+  /* Question card variables */
+  --question-card-bg: linear-gradient(135deg, #ff00ff 0%, #00ffff 50%, #ff0080 100%);
+  --question-card-text: #000000;
+  --question-card-border: #ff00ff;
+  --question-card-shadow: 0 8px 16px rgba(255, 0, 255, 0.3);
+  --question-card-meta-text: rgba(0, 0, 0, 0.8);
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--bg-primary);
@@ -1536,6 +1779,394 @@ body {
   }
 }
 
+/* Minecraft Easter Egg Effects */
+[data-theme="minecraft"] {
+  body {
+    position: relative;
+    overflow-x: hidden;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(74, 124, 89, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(90, 140, 105, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(106, 156, 121, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: minecraftBlocky 6s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(47, 79, 47, 0.05) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(74, 124, 89, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    animation: minecraftGrid 8s linear infinite;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 !important;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(74, 124, 89, 0.1) 50%, transparent 70%);
+    animation: minecraftGlow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .character-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 !important;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(90, 140, 105, 0.1) 50%, transparent 70%);
+    animation: minecraftBlocky 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-radius: 0 !important;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(240, 248, 240, 0.3), transparent);
+    animation: minecraftShimmer 2s ease-in-out infinite;
+  }
+  
+  .btn:hover {
+    box-shadow: 
+      0 0 20px rgba(74, 124, 89, 0.5),
+      0 0 40px rgba(90, 140, 105, 0.3),
+      inset 0 0 20px rgba(106, 156, 121, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  .form-control {
+    border-radius: 0 !important;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .form-control:focus {
+    box-shadow: 
+      0 0 10px rgba(74, 124, 89, 0.5),
+      0 0 20px rgba(90, 140, 105, 0.3),
+      inset 0 0 10px rgba(106, 156, 121, 0.2);
+    border-color: #2F4F2F;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px rgba(74, 124, 89, 0.3);
+    animation: minecraftTextGlow 4s ease-in-out infinite;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+  
+  .character-card h3 {
+    text-shadow: 0 0 15px rgba(47, 79, 47, 0.8);
+  }
+  
+  /* Pixelated borders for all elements */
+  * {
+    border-radius: 0 !important;
+  }
+  
+  /* Special blocky effects for cards */
+  .card, .character-card, .question-card {
+    box-shadow: 
+      0 0 0 2px var(--border-color),
+      0 4px 8px rgba(47, 79, 47, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .card:hover, .character-card:hover, .question-card:hover {
+    box-shadow: 
+      0 0 0 3px var(--border-color),
+      0 8px 16px rgba(47, 79, 47, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Star Wars Easter Egg Effects */
+[data-theme="starwars"] {
+  body {
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Orbitron', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: starwarsGlow 8s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.05) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(255, 165, 0, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    animation: starwarsScan 10s linear infinite;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+    animation: starwarsEnergy 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .character-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 165, 0, 0.1) 50%, transparent 70%);
+    animation: starwarsGlow 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    animation: starwarsShimmer 2s ease-in-out infinite;
+  }
+  
+  .btn:hover {
+    box-shadow: 
+      0 0 20px rgba(255, 215, 0, 0.5),
+      0 0 40px rgba(255, 165, 0, 0.3),
+      inset 0 0 20px rgba(255, 140, 0, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    animation: starwarsTextGlow 4s ease-in-out infinite;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+  }
+  
+  .character-card h3 {
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  }
+}
+
+/* Synthwave Easter Egg Effects */
+[data-theme="synthwave"] {
+  body {
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Orbitron', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: synthwavePulse 6s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, transparent 0%, rgba(255, 0, 255, 0.05) 50%, transparent 100%),
+      linear-gradient(0deg, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+    animation: synthwaveGrid 8s linear infinite;
+  }
+  
+  .card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 0, 255, 0.1) 50%, transparent 70%);
+    animation: synthwaveGlow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .character-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+    animation: synthwavePulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: synthwaveShimmer 2s ease-in-out infinite;
+  }
+  
+  .btn:hover {
+    box-shadow: 
+      0 0 20px rgba(255, 0, 255, 0.5),
+      0 0 40px rgba(0, 255, 255, 0.3),
+      inset 0 0 20px rgba(255, 0, 128, 0.2);
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    animation: synthwaveTextGlow 4s ease-in-out infinite;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+  }
+  
+  .character-card h3 {
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  }
+}
+
 /* D&D Animations */
 @keyframes dndParchment {
   0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
@@ -1598,6 +2229,91 @@ body {
 @keyframes tradeTextGlow {
   0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 170, 0.3); }
   50% { text-shadow: 0 0 20px rgba(0, 212, 170, 0.6), 0 0 30px rgba(0, 184, 148, 0.4); }
+}
+
+/* Minecraft Animations */
+@keyframes minecraftBlocky {
+  0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  25% { opacity: 1; transform: scale(1.02) rotate(0.5deg); }
+  50% { opacity: 0.9; transform: scale(0.98) rotate(-0.5deg); }
+  75% { opacity: 1; transform: scale(1.01) rotate(0.25deg); }
+}
+
+@keyframes minecraftGrid {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes minecraftGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes minecraftShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes minecraftTextGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(74, 124, 89, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(74, 124, 89, 0.6), 0 0 30px rgba(90, 140, 105, 0.4); }
+}
+
+/* Star Wars Animations */
+@keyframes starwarsGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.02) rotate(0.5deg); }
+}
+
+@keyframes starwarsScan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes starwarsEnergy {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes starwarsShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes starwarsTextGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 165, 0, 0.4); }
+}
+
+/* Synthwave Animations */
+@keyframes synthwavePulse {
+  0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  25% { opacity: 1; transform: scale(1.02) rotate(0.5deg); }
+  50% { opacity: 0.9; transform: scale(0.98) rotate(-0.5deg); }
+  75% { opacity: 1; transform: scale(1.01) rotate(0.25deg); }
+}
+
+@keyframes synthwaveGrid {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes synthwaveGlow {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes synthwaveShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes synthwaveTextGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(255, 0, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4); }
 }
 
 .container {
