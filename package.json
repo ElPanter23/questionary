@@ -1,6 +1,6 @@
 {
   "name": "question-tool",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Frage-Charakter-System mit Angular Frontend und Node.js Backend",
   "main": "server/index.js",
   "scripts": {
