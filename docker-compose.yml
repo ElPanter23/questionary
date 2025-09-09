@@ -10,6 +10,7 @@ services:
       - PORT=3000
       - DB_PATH=./server/database/questions.db
       - CORS_ORIGIN=http://localhost:3000
+      - DEMO_MODE=false
     volumes:
       - question-tool-data:/app/server/database
     restart: unless-stopped
@@ -20,5 +21,26 @@ services:
       retries: 3
       start_period: 40s
 
+  question-tool-demo:
+    build: .
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_PATH=./server/database/questions.db
+      - CORS_ORIGIN=http://localhost:3001
+      - DEMO_MODE=true
+    volumes:
+      - question-tool-demo-data:/app/server/database
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
 volumes:
   question-tool-data:
+  question-tool-demo-data:

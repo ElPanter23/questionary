@@ -51,6 +51,55 @@ Ein interaktives Frage-Charakter-System mit Angular Frontend und Node.js Backend
    npm run build
    ```
 
+## Docker Setup
+
+Das Projekt unterstützt sowohl den regulären Modus als auch einen Demo-only Modus über Docker.
+
+### Docker Compose (Empfohlen)
+
+1. **Beide Versionen starten:**
+   ```bash
+   docker-compose up
+   ```
+   - Reguläre Version: http://localhost:3000
+   - Demo Version: http://localhost:3001
+
+2. **Nur reguläre Version:**
+   ```bash
+   docker-compose up question-tool
+   ```
+
+3. **Nur Demo Version:**
+   ```bash
+   docker-compose up question-tool-demo
+   ```
+
+4. **Mit dem Hilfsskript:**
+   ```bash
+   ./docker-run.sh [regular|demo|both]
+   ```
+
+### Einzelne Docker Container
+
+1. **Reguläre Version:**
+   ```bash
+   docker build -t question-tool .
+   docker run -p 3000:3000 -e DEMO_MODE=false question-tool
+   ```
+
+2. **Demo Version:**
+   ```bash
+   docker build -t question-tool-demo .
+   docker run -p 3001:3000 -e DEMO_MODE=true question-tool-demo
+   ```
+
+### Demo-only Modus
+
+Der Demo-only Modus zeigt nur die Demo-Funktionalität ohne die vollständigen Admin-Features. Er ist ideal für:
+- Präsentationen
+- Testzwecke
+- Öffentliche Demos
+
 ## Verwendung
 
 ### Charaktere erstellen

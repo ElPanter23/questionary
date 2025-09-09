@@ -1,5 +1,5 @@
 # Multi-stage build for Question Tool
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -12,14 +12,20 @@ COPY client/package*.json ./client/
 RUN npm ci --only=production
 RUN cd client && npm ci
 
+# Install Angular CLI globally for building
+RUN npm install -g @angular/cli
+
 # Copy source code
 COPY . .
 
-# Build the Angular application
+# Build the Angular application (regular mode)
 RUN npm run build
 
+# Build the Angular application (demo-only mode)
+RUN npm run build:demo
+
 # Production stage
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
@@ -28,8 +34,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
-# Copy built frontend from builder stage
+# Copy built frontend from builder stage (regular mode)
 COPY --from=builder /app/client/dist/question-tool ./public
+
+# Copy built frontend from builder stage (demo-only mode)
+COPY --from=builder /app/client/dist/question-tool-demo ./public-demo
 
 # Copy backend source
 COPY server/ ./server/

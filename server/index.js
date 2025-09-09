@@ -11,10 +11,18 @@ const { initializeDatabase } = require('./database/init');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Determine which frontend to serve based on environment variable
+const isDemoMode = process.env.DEMO_MODE === 'true';
+const frontendPath = isDemoMode ? '../public-demo' : '../public';
+const indexPath = isDemoMode ? 'index-demo-only.html' : 'index.html';
+
+console.log(`Starting server in ${isDemoMode ? 'demo-only' : 'regular'} mode`);
+console.log(`Serving frontend from: ${frontendPath}`);
+
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../client/dist/question-tool')));
+app.use(express.static(path.join(__dirname, frontendPath)));
 
 // Initialize database
 initializeDatabase();
@@ -28,7 +36,7 @@ app.use('/api/demo', demoRoutes);
 
 // Serve Angular app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/question-tool/index.html'));
+  res.sendFile(path.join(__dirname, frontendPath, indexPath));
 });
 
 app.listen(PORT, () => {
