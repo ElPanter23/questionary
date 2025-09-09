@@ -1,0 +1,123 @@
+<div class="card">
+  <div class="demo-header mb-4">
+    <div class="demo-info">
+      <p class="text-center text-muted">{{ i18nService.getTranslation('sessionId') }}: <code>{{ sSessionId }}</code></p>
+    </div>
+    <button class="btn btn-secondary" (click)="backToDemoLanding()">
+      ← {{ i18nService.getTranslation('backToDemo') }}
+    </button>
+  </div>
+
+  <!-- Demo Navigation -->
+  <nav class="card mb-4">
+    <div class="grid grid-3">
+      <a [routerLink]="['/demo', sSessionId]" class="btn btn-secondary" routerLinkActive="active">
+        🎮 {{ i18nService.getTranslation('game') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'characters']" class="btn btn-secondary" routerLinkActive="active">
+        👥 {{ i18nService.getTranslation('characters') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'questions']" class="btn btn-secondary" routerLinkActive="active">
+        ❓ {{ i18nService.getTranslation('questions') }}
+      </a>
+    </div>
+  </nav>
+  
+  <!-- Charakter-Auswahl -->
+  <div class="mb-4">
+    <h3>{{ i18nService.getTranslation('selectCharacter') }}</h3>
+    <div class="grid grid-2 mt-4" *ngIf="oCharacters.length > 0">
+      <div 
+        *ngFor="let character of oCharacters" 
+        class="character-card"
+        [class.selected]="oSelectedCharacter?.id === character.id"
+        (click)="selectCharacter(character)">
+        <h3>{{ character.name }}</h3>
+        <p>{{ character.description || i18nService.getTranslation('noDescription') }}</p>
+        <div class="status-badge" [class.completed]="getCharacterStatus(character.id)?.answered_count === getCharacterStatus(character.id)?.total_questions">
+          {{ getCharacterStatus(character.id)?.answered_count || 0 }} / {{ getCharacterStatus(character.id)?.total_questions || 0 }} {{ i18nService.getTranslation('questions') }}
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="oCharacters.length === 0" class="text-center">
+      <p>{{ i18nService.getTranslation('noCharactersAvailable') }}</p>
+    </div>
+  </div>
+
+  <!-- Season Selection -->
+  <div class="mb-4" *ngIf="oCharacters.length > 0">
+    <h3>{{ i18nService.getTranslation('selectSeason') }}</h3>
+    <div class="form-group">
+      <select 
+        class="form-control" 
+        [(ngModel)]="sSelectedSeason" 
+        (ngModelChange)="onSeasonChange()">
+        <option value="">{{ i18nService.getTranslation('allSeasons') }}</option>
+        <option *ngFor="let season of aAvailableSeasons" [value]="season">
+          {{ i18nService.getTranslation('season') }} {{ season }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Aktuelle Frage -->
+  <div *ngIf="oCurrentQuestion && oSelectedCharacter" class="question-card">
+    <h2>{{ oCurrentQuestion.question.text }}</h2>
+    <div class="question-meta">
+      <span *ngIf="oCurrentQuestion.question.category">{{ i18nService.getTranslation('category') }}: {{ oCurrentQuestion.question.category }}</span>
+      <span *ngIf="oCurrentQuestion.question.difficulty"> • {{ i18nService.getTranslation('season') }}: {{ oCurrentQuestion.question.difficulty }}</span>
+    </div>
+    
+    <div class="answer-section mt-4">
+      <label for="answerText" class="form-label">{{ i18nService.getTranslation('yourAnswer') }}</label>
+      <textarea 
+        id="answerText"
+        class="form-control textarea answer-textarea" 
+        [(ngModel)]="sCurrentAnswer"
+        [placeholder]="i18nService.getTranslation('enterAnswerHere')"
+        rows="4"
+        maxlength="1000">
+      </textarea>
+      <div class="answer-counter">
+        {{ sCurrentAnswer.length || 0 }} / 1000 {{ i18nService.getTranslation('characters') }}
+      </div>
+    </div>
+    
+    <div class="mt-4">
+      <button 
+        class="btn" 
+        (click)="markAsAnswered()"
+        [disabled]="!sCurrentAnswer || sCurrentAnswer.trim() === ''">
+        ✅ {{ i18nService.getTranslation('saveAnswer') }}
+      </button>
+      <button class="btn btn-secondary btn-margin-left" (click)="getNewQuestion()">
+        🔄 {{ i18nService.getTranslation('newQuestion') }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Keine Fragen verfügbar -->
+  <div *ngIf="bNoQuestionsAvailable && oSelectedCharacter" class="text-center">
+    <h3>🎉 {{ i18nService.getTranslation('allQuestionsAnswered') }}</h3>
+    <p>{{ i18nService.getTranslation('allQuestionsAnsweredFor') }} {{ oSelectedCharacter.name }} {{ i18nService.getTranslation('questions') }}.</p>
+    <button class="btn btn-secondary" (click)="resetCharacter()">
+      🔄 {{ i18nService.getTranslation('resetCharacter') }}
+    </button>
+  </div>
+
+  <!-- Lade-Status -->
+  <div *ngIf="bIsLoading" class="loading">
+    <p>{{ i18nService.getTranslation('loading') }}</p>
+  </div>
+
+  <!-- Fehler -->
+  <div *ngIf="sError" class="error">
+    {{ sError }}
+  </div>
+
+  <!-- Erfolg -->
+  <div *ngIf="sSuccessMessage" class="success">
+    {{ sSuccessMessage }}
+  </div>
+</div>

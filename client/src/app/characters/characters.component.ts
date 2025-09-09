@@ -209,4 +209,24 @@ export class CharactersComponent implements OnInit {
       }
     });
   }
+
+  getCharacterStatus(characterId: number): any {
+    // This would need to be implemented to get character status
+    // For now, return null to avoid errors
+    return null;
+  }
+
+  resetAllCharacters() {
+    if (confirm(this.i18nService.getTranslation('confirmResetAll'))) {
+      this.apiService.resetAllCharacters().subscribe({
+        next: () => {
+          this.successMessage = this.i18nService.getTranslation('allCharactersReset');
+          this.loadCharacters();
+        },
+        error: (err) => {
+          this.error = this.i18nService.getTranslation('errorResetting') + ' ' + err.message;
+        }
+      });
+    }
+  }
 }

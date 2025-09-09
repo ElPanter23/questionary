@@ -1,4 +1,4 @@
-/* Characters Component Styles - Updated to match demo design with theme support */
+/* Demo Characters Component Styles - Matches base characters design with theme support */
 .characters-list {
   display: flex;
   flex-direction: column;

@@ -7,23 +7,31 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "client": "cd client && ng serve",
+    "client:demo": "cd client && ng serve --configuration demo-only",
     "build": "cd client && ng build",
     "install-all": "npm install && cd client && npm install",
-    "start:all": "concurrently \"npm start\" \"npm run client\" --names \"backend,frontend\" --prefix-colors \"blue,green\""
+    "start:all": "concurrently \"npm start\" \"npm run client\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
+    "start:all:demo": "concurrently \"npm start\" \"npm run client:demo\" --names \"backend,frontend\" --prefix-colors \"blue,green\""
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "sqlite3": "^5.1.6",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.3.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1"
   },
-  "keywords": ["questions", "characters", "angular", "nodejs"],
+  "keywords": [
+    "questions",
+    "characters",
+    "angular",
+    "nodejs"
+  ],
   "author": "ElPanter23",
   "license": "MIT"
 }

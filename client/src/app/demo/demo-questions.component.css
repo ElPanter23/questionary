@@ -1,29 +1,17 @@
-/* Questions Component Styles - Theme compatible */
-.card {
-  margin-bottom: 16px;
-}
-
-.card h4 {
-  margin-bottom: 12px;
-  line-height: 1.4;
-}
-
-.status-badge-margin {
-  margin-left: 8px;
-}
-
+/* Demo Questions Component Styles - Updated to match old questions design with theme support */
 .question-card {
-  background: var(--question-card-bg, #fff);
-  color: var(--question-card-text, #333);
+  position: relative;
+  transition: all 0.3s ease;
   border: 2px solid var(--question-card-border, #e0e0e0);
   border-radius: 8px;
   padding: 20px;
+  background: var(--question-card-bg, #fff);
+  color: var(--question-card-text, #333);
   box-shadow: var(--question-card-shadow, 0 2px 4px rgba(0,0,0,0.1));
-  transition: all 0.3s ease;
 }
 
 .question-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   box-shadow: var(--question-card-shadow, 0 4px 12px rgba(0,0,0,0.15));
 }
 
@@ -66,4 +54,20 @@
   border-radius: 4px;
   font-size: 0.8em;
   font-weight: 500;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted, #666);
+  font-style: italic;
+}
+
+.error {
+  background: var(--theme-toggle-bg, #f8d7da);
+  color: var(--text-primary, #721c24);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color, #f5c6cb);
+  margin-bottom: 1rem;
 }

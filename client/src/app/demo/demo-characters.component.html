@@ -1,5 +1,28 @@
 <div class="card">
-  <h2 class="text-center mb-4">👥 {{ i18nService.getTranslation('manageCharactersTitle') }}</h2>
+  <div class="demo-header mb-4">
+    <div class="demo-info">
+      <h2 class="text-center mb-2">👥 {{ i18nService.getTranslation('characters') }} ({{ i18nService.getTranslation('demoMode') }})</h2>
+      <p class="text-center text-muted">{{ i18nService.getTranslation('sessionId') }}: <code>{{ sSessionId }}</code></p>
+    </div>
+    <button class="btn btn-secondary" (click)="backToDemoLanding()">
+      ← {{ i18nService.getTranslation('backToDemo') }}
+    </button>
+  </div>
+
+  <!-- Demo Navigation -->
+  <nav class="card mb-4">
+    <div class="grid grid-3">
+      <a [routerLink]="['/demo', sSessionId]" class="btn btn-secondary" routerLinkActive="active">
+        🎮 {{ i18nService.getTranslation('game') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'characters']" class="btn btn-secondary" routerLinkActive="active">
+        👥 {{ i18nService.getTranslation('characters') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'questions']" class="btn btn-secondary" routerLinkActive="active">
+        ❓ {{ i18nService.getTranslation('questions') }}
+      </a>
+    </div>
+  </nav>
   
   <!-- Neuen Charakter hinzufügen -->
   <div class="mb-4">
@@ -27,8 +50,8 @@
           [placeholder]="i18nService.getTranslation('placeholderCharacterDescription')"></textarea>
       </div>
       
-      <button type="submit" class="btn" [disabled]="!characterForm.form.valid || loading">
-        {{ loading ? i18nService.getTranslation('adding') : i18nService.getTranslation('addCharacter') }}
+      <button type="submit" class="btn" [disabled]="!characterForm.form.valid || bIsLoading">
+        {{ bIsLoading ? i18nService.getTranslation('adding') : i18nService.getTranslation('addCharacter') }}
       </button>
     </form>
   </div>
@@ -41,9 +64,9 @@
   </div>
 
   <!-- Characters List -->
-  <div *ngIf="!loading && characters.length > 0" class="characters-list">
+  <div *ngIf="!bIsLoading && oCharacters.length > 0" class="characters-list">
     <div 
-      *ngFor="let character of characters" 
+      *ngFor="let character of oCharacters" 
       class="character-item">
       <div class="character-info">
         <h3>{{ character.name }}</h3>
@@ -82,58 +105,23 @@
   </div>
 
   <!-- No Characters -->
-  <div *ngIf="!loading && characters.length === 0" class="text-center">
+  <div *ngIf="!bIsLoading && oCharacters.length === 0" class="text-center">
     <p>{{ i18nService.getTranslation('noCharactersYet') }}</p>
   </div>
 
-  <!-- Bearbeiten-Modal -->
-  <div *ngIf="editingCharacter" class="card mt-4">
-    <h3>{{ i18nService.getTranslation('editCharacterTitle') }}</h3>
-    <form (ngSubmit)="updateCharacter()" #editForm="ngForm">
-      <div class="form-group">
-        <label class="form-label" for="editName">{{ i18nService.getTranslation('name') }} *</label>
-        <input 
-          type="text" 
-          id="editName" 
-          name="editName" 
-          class="form-control" 
-          [(ngModel)]="editingCharacter.name" 
-          required>
-      </div>
-      
-      <div class="form-group">
-        <label class="form-label" for="editDescription">{{ i18nService.getTranslation('description') }}</label>
-        <textarea 
-          id="editDescription" 
-          name="editDescription" 
-          class="form-control textarea" 
-          [(ngModel)]="editingCharacter.description"></textarea>
-      </div>
-      
-      <div>
-        <button type="submit" class="btn" [disabled]="!editForm.form.valid || loading">
-          {{ loading ? i18nService.getTranslation('saving') : i18nService.getTranslation('save') }}
-        </button>
-        <button type="button" class="btn btn-secondary btn-margin-left" (click)="cancelEdit()">
-          {{ i18nService.getTranslation('cancel') }}
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Lade-Status -->
-  <div *ngIf="loading && !editingCharacter" class="loading">
+  <!-- Loading -->
+  <div *ngIf="bIsLoading" class="loading">
     <p>{{ i18nService.getTranslation('loading') }}</p>
   </div>
 
-  <!-- Fehler -->
-  <div *ngIf="error" class="error">
-    {{ error }}
+  <!-- Error -->
+  <div *ngIf="sError" class="error">
+    {{ sError }}
   </div>
 
-  <!-- Erfolg -->
-  <div *ngIf="successMessage" class="success">
-    {{ successMessage }}
+  <!-- Success -->
+  <div *ngIf="sSuccessMessage" class="success">
+    {{ sSuccessMessage }}
   </div>
 
   <!-- Charakter-Details Modal -->
@@ -159,10 +147,10 @@
           <label>{{ i18nService.getTranslation('description') }}:</label>
           <span>{{ selectedCharacter.description || i18nService.getTranslation('noDescription') }}</span>
         </div>
-        <div class="info-row">
-          <label>{{ i18nService.getTranslation('created') }}:</label>
-          <span>{{ formatDate(selectedCharacter.created_at) }}</span>
-        </div>
+             <div class="info-row">
+               <label>{{ i18nService.getTranslation('created') }}:</label>
+               <span>{{ selectedCharacter.created_at ? formatDate(selectedCharacter.created_at) : i18nService.getTranslation('unknown') }}</span>
+             </div>
       </div>
       
       <div class="character-stats" *ngIf="characterStats">
@@ -186,9 +174,6 @@
       <div class="character-actions-details">
         <button class="btn btn-primary" (click)="startGameWithCharacter(selectedCharacter)">
           🎮 {{ i18nService.getTranslation('startGame') }}
-        </button>
-        <button class="btn btn-secondary" (click)="editCharacter(selectedCharacter)">
-          ✏️ {{ i18nService.getTranslation('editCharacter') }}
         </button>
         <button class="btn btn-warning" (click)="resetCharacterProgress(selectedCharacter.id)">
           🔄 {{ i18nService.getTranslation('resetProgress') }}

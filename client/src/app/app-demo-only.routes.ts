@@ -6,9 +6,5 @@ export const routes: Routes = [
   { path: 'demo/:id', loadComponent: () => import('./demo/demo-game.component').then(m => m.DemoGameComponent) },
   { path: 'demo/:id/characters', loadComponent: () => import('./demo/demo-characters.component').then(m => m.DemoCharactersComponent) },
   { path: 'demo/:id/questions', loadComponent: () => import('./demo/demo-questions.component').then(m => m.DemoQuestionsComponent) },
-  { path: 'game', loadComponent: () => import('./game/game.component').then(m => m.GameComponent) },
-  { path: 'characters', loadComponent: () => import('./characters/characters.component').then(m => m.CharactersComponent) },
-  { path: 'questions', loadComponent: () => import('./questions/questions.component').then(m => m.QuestionsComponent) },
-  { path: 'admin', loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent) },
   { path: '**', redirectTo: '/demo' }
 ];

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from './services/theme.service';
 import { I18nService } from './services/i18n.service';
@@ -16,5 +16,11 @@ import { LanguageSelectorComponent } from './components/language-selector.compon
 export class AppComponent {
   public readonly i18nService = inject(I18nService);
   public readonly themeService = inject(ThemeService);
+  private router = inject(Router);
   title = 'question-tool';
+
+  isDemoMode(): boolean {
+    const url = this.router.url;
+    return url.startsWith('/demo');
+  }
 }

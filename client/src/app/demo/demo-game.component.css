@@ -1,0 +1,73 @@
+/* Demo Game Component Styles - matches regular game component with theme support */
+.demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.demo-info h2 {
+  margin: 0;
+  color: var(--text-primary, #333);
+}
+
+.demo-info p {
+  margin: 0.25rem 0 0 0;
+  color: var(--text-muted, #666);
+  font-size: 0.9rem;
+}
+
+.demo-info code {
+  background: var(--theme-toggle-bg, #f1f3f4);
+  color: var(--text-primary, #333);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+/* Inherit all styles from regular game component */
+.selected {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(240, 147, 251, 0.4) !important;
+}
+
+.character-card {
+  position: relative;
+}
+
+.character-card:hover {
+  transform: translateY(-4px);
+}
+
+.selected:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.answer-section {
+  margin: 20px 0;
+}
+
+.answer-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.answer-counter {
+  text-align: right;
+  font-size: 0.9em;
+  color: var(--text-muted, #666);
+  margin-top: 4px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text-primary, #333);
+}
+
+.btn-margin-left {
+  margin-left: 12px;
+}

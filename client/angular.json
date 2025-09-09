@@ -57,6 +57,25 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "demo-only": {
+              "outputPath": "dist/question-tool-demo",
+              "index": "src/index-demo-only.html",
+              "main": "src/main-demo-only.ts",
+              "tsConfig": "tsconfig.demo-only.json",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
             }
           },
           "defaultConfiguration": "production"
@@ -69,6 +88,9 @@
             },
             "development": {
               "buildTarget": "question-tool:build:development"
+            },
+            "demo-only": {
+              "buildTarget": "question-tool:build:demo-only"
             }
           },
           "defaultConfiguration": "development"

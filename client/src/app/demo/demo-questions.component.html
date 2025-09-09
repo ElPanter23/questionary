@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="demo-header mb-4">
+    <div class="demo-info">
+      <h2 class="text-center mb-2">❓ {{ i18nService.getTranslation('questions') }} ({{ i18nService.getTranslation('demoMode') }})</h2>
+      <p class="text-center text-muted">{{ i18nService.getTranslation('sessionId') }}: <code>{{ sSessionId }}</code></p>
+    </div>
+    <button class="btn btn-secondary" (click)="backToDemoLanding()">
+      ← {{ i18nService.getTranslation('backToDemo') }}
+    </button>
+  </div>
+
+  <!-- Demo Navigation -->
+  <nav class="card mb-4">
+    <div class="grid grid-3">
+      <a [routerLink]="['/demo', sSessionId]" class="btn btn-secondary" routerLinkActive="active">
+        🎮 {{ i18nService.getTranslation('game') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'characters']" class="btn btn-secondary" routerLinkActive="active">
+        👥 {{ i18nService.getTranslation('characters') }}
+      </a>
+      <a [routerLink]="['/demo', sSessionId, 'questions']" class="btn btn-secondary" routerLinkActive="active">
+        ❓ {{ i18nService.getTranslation('questions') }}
+      </a>
+    </div>
+  </nav>
+  
+  <!-- Questions List -->
+  <div>
+    <h3>{{ i18nService.getTranslation('existingQuestions') }} ({{ oQuestions.length }})</h3>
+    
+    <div *ngIf="oQuestions.length === 0" class="text-center">
+      <p>{{ i18nService.getTranslation('noQuestionsYet') }}</p>
+    </div>
+    
+    <div class="grid grid-2" *ngIf="oQuestions.length > 0">
+      <div *ngFor="let question of oQuestions" class="question-card">
+        <div class="question-header">
+          <h3>{{ question.text }}</h3>
+          <span class="question-id">#{{ question.id }}</span>
+        </div>
+        <div class="question-meta">
+          <span *ngIf="question.category" class="question-category">{{ question.category }}</span>
+          <span *ngIf="question.difficulty" class="question-difficulty">
+            {{ i18nService.getTranslation('season') }} {{ question.difficulty }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="bIsLoading" class="loading">
+    <p>{{ i18nService.getTranslation('loading') }}</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="sError" class="error">
+    {{ sError }}
+  </div>
+</div>

@@ -1,37 +1,60 @@
 <div class="container">
-  <header class="text-center mb-4">
-    <div class="header-controls">
-      <div class="header-title">
-        <h1>
-          {{ i18nService.getTranslation('questionTool') }}
-        </h1>
-        <p>
-          {{ i18nService.getTranslation('discoverCharacters') }}
-        </p>
+  <!-- Regular mode header and navigation -->
+  <div *ngIf="!isDemoMode()">
+    <header class="text-center mb-4">
+      <div class="header-controls">
+        <div class="header-title">
+          <h1>
+            {{ i18nService.getTranslation('questionTool') }}
+          </h1>
+          <p>
+            {{ i18nService.getTranslation('discoverCharacters') }}
+          </p>
+        </div>
+        <div class="header-actions">
+          <app-language-selector></app-language-selector>
+          <app-theme-toggle></app-theme-toggle>
+        </div>
       </div>
-      <div class="header-actions">
-        <app-language-selector></app-language-selector>
-        <app-theme-toggle></app-theme-toggle>
+    </header>
+    
+    <nav class="card mb-4">
+      <div class="grid grid-4">
+        <a routerLink="/game" class="btn btn-secondary" routerLinkActive="active">
+          🎮 {{ i18nService.getTranslation('game') }}
+        </a>
+        <a routerLink="/characters" class="btn btn-secondary" routerLinkActive="active">
+          👥 {{ i18nService.getTranslation('characters') }}
+        </a>
+        <a routerLink="/questions" class="btn btn-secondary" routerLinkActive="active">
+          ❓ {{ i18nService.getTranslation('questions') }}
+        </a>
+        <a routerLink="/admin" class="btn btn-secondary" routerLinkActive="active">
+          ⚙️ {{ i18nService.getTranslation('admin') }}
+        </a>
       </div>
-    </div>
-  </header>
-  
-  <nav class="card mb-4">
-    <div class="grid grid-4">
-      <a routerLink="/game" class="btn btn-secondary" routerLinkActive="active">
-        🎮 {{ i18nService.getTranslation('game') }}
-      </a>
-      <a routerLink="/characters" class="btn btn-secondary" routerLinkActive="active">
-        👥 {{ i18nService.getTranslation('characters') }}
-      </a>
-      <a routerLink="/questions" class="btn btn-secondary" routerLinkActive="active">
-        ❓ {{ i18nService.getTranslation('questions') }}
-      </a>
-      <a routerLink="/admin" class="btn btn-secondary" routerLinkActive="active">
-        ⚙️ {{ i18nService.getTranslation('admin') }}
-      </a>
-    </div>
-  </nav>
+    </nav>
+  </div>
+
+  <!-- Demo mode header -->
+  <div *ngIf="isDemoMode()">
+    <header class="text-center mb-4">
+      <div class="header-controls">
+        <div class="header-title">
+          <h1>
+            🎮 {{ i18nService.getTranslation('demoMode') }}
+          </h1>
+          <p>
+            {{ i18nService.getTranslation('demoDescription') }}
+          </p>
+        </div>
+        <div class="header-actions">
+          <app-language-selector></app-language-selector>
+          <app-theme-toggle></app-theme-toggle>
+        </div>
+      </div>
+    </header>
+  </div>
   
   <main>
     <router-outlet></router-outlet>

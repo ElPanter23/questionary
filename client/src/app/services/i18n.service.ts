@@ -56,6 +56,7 @@ export interface Translation {
   answerSaved: string;
   characterReset: string;
   errorLoadingCharacters: string;
+  errorAddingCharacter: string;
   errorLoadingQuestion: string;
   errorSaving: string;
   errorResetting: string;
@@ -181,6 +182,46 @@ export interface Translation {
   placeholderMultipleQuestions: string;
   placeholderUrl: string;
   placeholderCustomCategory: string;
+  
+  // Demo mode
+  demoMode: string;
+  demoDescription: string;
+  startNewDemo: string;
+  startNewDemoDescription: string;
+  startDemo: string;
+  joinExistingDemo: string;
+  joinExistingDemoDescription: string;
+  enterDemoId: string;
+  joinDemo: string;
+  demoInfo: string;
+  demoInfo1: string;
+  demoInfo2: string;
+  demoInfo3: string;
+  sessionId: string;
+  backToDemo: string;
+  errorStartingDemo: string;
+  pleaseEnterDemoId: string;
+  invalidDemoId: string;
+  errorValidatingDemo: string;
+  noQuestionsAvailable: string;
+  tryAgain: string;
+  enterYourAnswer: string;
+  markAsAnswered: string;
+  skipQuestion: string;
+  difficulty: string;
+  or: string;
+  
+  // Additional demo translations
+  easy: string;
+  medium: string;
+  hard: string;
+  expert: string;
+  unknown: string;
+  showing: string;
+  of: string;
+  clearFilters: string;
+  demoDisclaimer: string;
+  demoModeDescription: string;
 }
 
 const translations: Record<Language, Translation> = {
@@ -238,6 +279,7 @@ const translations: Record<Language, Translation> = {
     answerSaved: 'Antwort gespeichert!',
     characterReset: 'Charakter wurde zurückgesetzt!',
     errorLoadingCharacters: 'Fehler beim Laden der Charaktere:',
+    errorAddingCharacter: 'Fehler beim Hinzufügen des Charakters:',
     errorLoadingQuestion: 'Fehler beim Laden der Frage:',
     errorSaving: 'Fehler beim Speichern:',
     errorResetting: 'Fehler beim Zurücksetzen:',
@@ -361,7 +403,47 @@ const translations: Record<Language, Translation> = {
     placeholderSeason: '1',
     placeholderMultipleQuestions: 'Was ist dein größter Traum?\nWelche Farbe beschreibt dich am besten?\nWas würdest du tun, wenn du unsichtbar wärst?',
     placeholderUrl: 'https://example.com/questions',
-    placeholderCustomCategory: 'z.B. Allgemein'
+    placeholderCustomCategory: 'z.B. Allgemein',
+    
+    // Demo mode
+    demoMode: 'Demo-Modus',
+    demoDescription: 'Teste das Question Tool mit Beispieldaten. Alle Daten werden nach 30 Minuten Inaktivität automatisch gelöscht.',
+    startNewDemo: 'Neue Demo starten',
+    startNewDemoDescription: 'Erstelle eine neue Demo-Session mit zufälliger ID',
+    startDemo: 'Demo starten',
+    joinExistingDemo: 'Bestehende Demo beitreten',
+    joinExistingDemoDescription: 'Gib eine Demo-ID ein, um eine bestehende Session fortzusetzen',
+    enterDemoId: 'Demo-ID eingeben',
+    joinDemo: 'Beitreten',
+    demoInfo: 'Demo-Informationen',
+    demoInfo1: 'Alle Daten sind temporär und werden nach 30 Minuten Inaktivität gelöscht',
+    demoInfo2: 'Du kannst die Demo-Session mit der ID jederzeit neu laden',
+    demoInfo3: 'Es werden nur Beispieldaten verwendet, keine echten oder urheberrechtlich geschützten Inhalte',
+    sessionId: 'Session-ID',
+    backToDemo: 'Zurück zur Demo',
+    errorStartingDemo: 'Fehler beim Starten der Demo:',
+    pleaseEnterDemoId: 'Bitte gib eine Demo-ID ein',
+    invalidDemoId: 'Ungültige Demo-ID',
+    errorValidatingDemo: 'Fehler beim Validieren der Demo:',
+    noQuestionsAvailable: 'Keine Fragen verfügbar',
+    tryAgain: 'Erneut versuchen',
+    enterYourAnswer: 'Gib deine Antwort ein',
+    markAsAnswered: 'Als beantwortet markieren',
+    skipQuestion: 'Frage überspringen',
+    difficulty: 'Schwierigkeit',
+    or: 'oder',
+    
+    // Additional demo translations
+    easy: 'Einfach',
+    medium: 'Mittel',
+    hard: 'Schwer',
+    expert: 'Experte',
+    unknown: 'Unbekannt',
+    showing: 'Zeige',
+    of: 'von',
+    clearFilters: 'Filter löschen',
+    demoDisclaimer: 'Dies ist eine Demo-Version. Daten werden automatisch nach 30 Minuten Inaktivität gelöscht.',
+    demoModeDescription: 'Erleben Sie das Frage-Charakter-System in einer sicheren Demo-Umgebung.'
   },
   en: {
     // Navigation
@@ -417,6 +499,7 @@ const translations: Record<Language, Translation> = {
     answerSaved: 'Answer saved!',
     characterReset: 'Character has been reset!',
     errorLoadingCharacters: 'Error loading characters:',
+    errorAddingCharacter: 'Error adding character:',
     errorLoadingQuestion: 'Error loading question:',
     errorSaving: 'Error saving:',
     errorResetting: 'Error resetting:',
@@ -540,7 +623,47 @@ const translations: Record<Language, Translation> = {
     placeholderSeason: '1',
     placeholderMultipleQuestions: 'What is your biggest dream?\nWhat color best describes you?\nWhat would you do if you were invisible?',
     placeholderUrl: 'https://example.com/questions',
-    placeholderCustomCategory: 'e.g. General'
+    placeholderCustomCategory: 'e.g. General',
+    
+    // Demo mode
+    demoMode: 'Demo Mode',
+    demoDescription: 'Try the Question Tool with sample data. All data will be automatically deleted after 30 minutes of inactivity.',
+    startNewDemo: 'Start New Demo',
+    startNewDemoDescription: 'Create a new demo session with random ID',
+    startDemo: 'Start Demo',
+    joinExistingDemo: 'Join Existing Demo',
+    joinExistingDemoDescription: 'Enter a demo ID to continue an existing session',
+    enterDemoId: 'Enter Demo ID',
+    joinDemo: 'Join',
+    demoInfo: 'Demo Information',
+    demoInfo1: 'All data is temporary and will be deleted after 30 minutes of inactivity',
+    demoInfo2: 'You can reload the demo session using the ID at any time',
+    demoInfo3: 'Only sample data is used, no real or copyrighted content',
+    sessionId: 'Session ID',
+    backToDemo: 'Back to Demo',
+    errorStartingDemo: 'Error starting demo:',
+    pleaseEnterDemoId: 'Please enter a demo ID',
+    invalidDemoId: 'Invalid demo ID',
+    errorValidatingDemo: 'Error validating demo:',
+    noQuestionsAvailable: 'No questions available',
+    tryAgain: 'Try Again',
+    enterYourAnswer: 'Enter your answer',
+    markAsAnswered: 'Mark as Answered',
+    skipQuestion: 'Skip Question',
+    difficulty: 'Difficulty',
+    or: 'or',
+    
+    // Additional demo translations
+    easy: 'Easy',
+    medium: 'Medium',
+    hard: 'Hard',
+    expert: 'Expert',
+    unknown: 'Unknown',
+    showing: 'Showing',
+    of: 'of',
+    clearFilters: 'Clear Filters',
+    demoDisclaimer: 'This is a demo version. Data is automatically deleted after 30 minutes of inactivity.',
+    demoModeDescription: 'Experience the question-character system in a safe demo environment.'
   },
   es: {
     // Navigation
@@ -596,6 +719,7 @@ const translations: Record<Language, Translation> = {
     answerSaved: '¡Respuesta guardada!',
     characterReset: '¡El personaje ha sido reiniciado!',
     errorLoadingCharacters: 'Error cargando personajes:',
+    errorAddingCharacter: 'Error agregando personaje:',
     errorLoadingQuestion: 'Error cargando pregunta:',
     errorSaving: 'Error guardando:',
     errorResetting: 'Error reiniciando:',
@@ -719,7 +843,47 @@ const translations: Record<Language, Translation> = {
     placeholderSeason: '1',
     placeholderMultipleQuestions: '¿Cuál es tu mayor sueño?\n¿Qué color te describe mejor?\n¿Qué harías si fueras invisible?',
     placeholderUrl: 'https://ejemplo.com/preguntas',
-    placeholderCustomCategory: 'ej. General'
+    placeholderCustomCategory: 'ej. General',
+    
+    // Demo mode
+    demoMode: 'Modo Demo',
+    demoDescription: 'Prueba la Herramienta de Preguntas con datos de muestra. Todos los datos se eliminarán automáticamente después de 30 minutos de inactividad.',
+    startNewDemo: 'Iniciar Nueva Demo',
+    startNewDemoDescription: 'Crear una nueva sesión demo con ID aleatorio',
+    startDemo: 'Iniciar Demo',
+    joinExistingDemo: 'Unirse a Demo Existente',
+    joinExistingDemoDescription: 'Ingresa un ID de demo para continuar una sesión existente',
+    enterDemoId: 'Ingresar ID de Demo',
+    joinDemo: 'Unirse',
+    demoInfo: 'Información de Demo',
+    demoInfo1: 'Todos los datos son temporales y se eliminarán después de 30 minutos de inactividad',
+    demoInfo2: 'Puedes recargar la sesión demo usando el ID en cualquier momento',
+    demoInfo3: 'Solo se usan datos de muestra, sin contenido real o con derechos de autor',
+    sessionId: 'ID de Sesión',
+    backToDemo: 'Volver a Demo',
+    errorStartingDemo: 'Error iniciando demo:',
+    pleaseEnterDemoId: 'Por favor ingresa un ID de demo',
+    invalidDemoId: 'ID de demo inválido',
+    errorValidatingDemo: 'Error validando demo:',
+    noQuestionsAvailable: 'No hay preguntas disponibles',
+    tryAgain: 'Intentar de Nuevo',
+    enterYourAnswer: 'Ingresa tu respuesta',
+    markAsAnswered: 'Marcar como Respondida',
+    skipQuestion: 'Saltar Pregunta',
+    difficulty: 'Dificultad',
+    or: 'o',
+    
+    // Additional demo translations
+    easy: 'Fácil',
+    medium: 'Medio',
+    hard: 'Difícil',
+    expert: 'Experto',
+    unknown: 'Desconocido',
+    showing: 'Mostrando',
+    of: 'de',
+    clearFilters: 'Limpiar Filtros',
+    demoDisclaimer: 'Esta es una versión de demostración. Los datos se eliminan automáticamente después de 30 minutos de inactividad.',
+    demoModeDescription: 'Experimenta el sistema de preguntas-personajes en un entorno de demostración seguro.'
   },
   fr: {
     // Navigation
@@ -775,6 +939,7 @@ const translations: Record<Language, Translation> = {
     answerSaved: 'Réponse sauvegardée !',
     characterReset: 'Le personnage a été réinitialisé !',
     errorLoadingCharacters: 'Erreur lors du chargement des personnages :',
+    errorAddingCharacter: 'Erreur lors de l\'ajout du personnage :',
     errorLoadingQuestion: 'Erreur lors du chargement de la question :',
     errorSaving: 'Erreur lors de la sauvegarde :',
     errorResetting: 'Erreur lors de la réinitialisation :',
@@ -898,7 +1063,47 @@ const translations: Record<Language, Translation> = {
     placeholderSeason: '1',
     placeholderMultipleQuestions: 'Quel est ton plus grand rêve ?\nQuelle couleur te décrit le mieux ?\nQue ferais-tu si tu étais invisible ?',
     placeholderUrl: 'https://exemple.com/questions',
-    placeholderCustomCategory: 'ex. Général'
+    placeholderCustomCategory: 'ex. Général',
+    
+    // Demo mode
+    demoMode: 'Mode Démo',
+    demoDescription: 'Essayez l\'Outil de Questions avec des données d\'exemple. Toutes les données seront automatiquement supprimées après 30 minutes d\'inactivité.',
+    startNewDemo: 'Démarrer Nouvelle Démo',
+    startNewDemoDescription: 'Créer une nouvelle session démo avec ID aléatoire',
+    startDemo: 'Démarrer Démo',
+    joinExistingDemo: 'Rejoindre Démo Existante',
+    joinExistingDemoDescription: 'Entrez un ID de démo pour continuer une session existante',
+    enterDemoId: 'Entrer ID de Démo',
+    joinDemo: 'Rejoindre',
+    demoInfo: 'Informations Démo',
+    demoInfo1: 'Toutes les données sont temporaires et seront supprimées après 30 minutes d\'inactivité',
+    demoInfo2: 'Vous pouvez recharger la session démo en utilisant l\'ID à tout moment',
+    demoInfo3: 'Seules des données d\'exemple sont utilisées, aucun contenu réel ou protégé par le droit d\'auteur',
+    sessionId: 'ID de Session',
+    backToDemo: 'Retour à la Démo',
+    errorStartingDemo: 'Erreur lors du démarrage de la démo :',
+    pleaseEnterDemoId: 'Veuillez entrer un ID de démo',
+    invalidDemoId: 'ID de démo invalide',
+    errorValidatingDemo: 'Erreur lors de la validation de la démo :',
+    noQuestionsAvailable: 'Aucune question disponible',
+    tryAgain: 'Réessayer',
+    enterYourAnswer: 'Entrez votre réponse',
+    markAsAnswered: 'Marquer comme Répondu',
+    skipQuestion: 'Passer la Question',
+    difficulty: 'Difficulté',
+    or: 'ou',
+    
+    // Additional demo translations
+    easy: 'Facile',
+    medium: 'Moyen',
+    hard: 'Difficile',
+    expert: 'Expert',
+    unknown: 'Inconnu',
+    showing: 'Affichage',
+    of: 'de',
+    clearFilters: 'Effacer les Filtres',
+    demoDisclaimer: 'Ceci est une version de démonstration. Les données sont automatiquement supprimées après 30 minutes d\'inactivité.',
+    demoModeDescription: 'Découvrez le système de questions-personnages dans un environnement de démonstration sécurisé.'
   }
 };
 

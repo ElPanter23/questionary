@@ -5,6 +5,7 @@ const questionRoutes = require('./routes/questions');
 const characterRoutes = require('./routes/characters');
 const gameRoutes = require('./routes/game');
 const adminRoutes = require('./routes/admin');
+const demoRoutes = require('./routes/demo');
 const { initializeDatabase } = require('./database/init');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use('/api/questions', questionRoutes);
 app.use('/api/characters', characterRoutes);
 app.use('/api/game', gameRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/demo', demoRoutes);
 
 // Serve Angular app
 app.get('*', (req, res) => {

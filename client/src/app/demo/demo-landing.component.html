@@ -1,0 +1,61 @@
+<div class="demo-landing">
+  <div class="demo-container">
+    <div class="demo-header">
+      <h1>🎮 {{ i18nService.getTranslation('demoMode') }}</h1>
+      <p>{{ i18nService.getTranslation('demoDescription') }}</p>
+    </div>
+
+    <div class="demo-actions">
+      <div class="demo-section">
+        <h2>{{ i18nService.getTranslation('startNewDemo') }}</h2>
+        <p>{{ i18nService.getTranslation('startNewDemoDescription') }}</p>
+        <button 
+          class="btn btn-primary btn-large" 
+          (click)="startDemo()" 
+          [disabled]="bIsLoading">
+          <span *ngIf="bIsLoading">⏳</span>
+          <span *ngIf="!bIsLoading">🚀</span>
+          {{ i18nService.getTranslation('startDemo') }}
+        </button>
+      </div>
+
+      <div class="demo-divider">
+        <span>{{ i18nService.getTranslation('or') }}</span>
+      </div>
+
+      <div class="demo-section">
+        <h2>{{ i18nService.getTranslation('joinExistingDemo') }}</h2>
+        <p>{{ i18nService.getTranslation('joinExistingDemoDescription') }}</p>
+        <div class="demo-input-group">
+          <input 
+            type="text" 
+            [(ngModel)]="sDemoId" 
+            [placeholder]="i18nService.getTranslation('enterDemoId')"
+            class="form-input"
+            (keyup.enter)="joinDemo()">
+          <button 
+            class="btn btn-secondary" 
+            (click)="joinDemo()" 
+            [disabled]="bIsLoading || !sDemoId">
+            {{ i18nService.getTranslation('joinDemo') }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-info">
+      <div class="info-card">
+        <h3>ℹ️ {{ i18nService.getTranslation('demoInfo') }}</h3>
+        <ul>
+          <li>{{ i18nService.getTranslation('demoInfo1') }}</li>
+          <li>{{ i18nService.getTranslation('demoInfo2') }}</li>
+          <li>{{ i18nService.getTranslation('demoInfo3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="sError" class="error-message">
+      {{ sError }}
+    </div>
+  </div>
+</div>
