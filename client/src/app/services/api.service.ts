@@ -48,7 +48,7 @@ export interface CharacterAnswers {
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:3000/api';
+  private baseUrl = '/api';
 
   constructor(private http: HttpClient) {}
 

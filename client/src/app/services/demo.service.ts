@@ -43,7 +43,7 @@ export interface DemoCharacterStatus {
   providedIn: 'root'
 })
 export class DemoService {
-  private baseUrl = 'http://localhost:3000/api/demo';
+  private baseUrl = '/api/demo';
   private currentSessionSubject = new BehaviorSubject<string | null>(null);
   public currentSession$ = this.currentSessionSubject.asObservable();
 
